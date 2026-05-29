@@ -1,0 +1,1526 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Manual de Imagen Corporativa | IMPULSA</title>
+<style>
+  :root{
+    /* === Paleta oficial IMPULSA (Pantones) === */
+    --negro:#262929;          /* Pantone negro IMPULSA */
+    --negro-suave:#363939;
+    --dorado:#BA8747;         /* Pantone dorado IMPULSA */
+    --dorado-claro:#D9A86A;
+    --dorado-oscuro:#8E6432;
+    --blanco:#FFFFFF;
+    --navy:#214A59;           /* Pantone navy IMPULSA */
+    --navy-oscuro:#163542;
+    /* === Neutros derivados (warm cream para evitar grises fríos) === */
+    --crema:#F6F1E8;
+    --crema-medio:#E3D9C5;
+    --texto-suave:#3a3530;
+    /* === Estados (do/don't) usando paleta IMPULSA === */
+    --ok-bg:#BA8747;     /* dorado para "permitido" */
+    --no-bg:#214A59;     /* navy para "no permitido" */
+    --sombra:0 8px 28px rgba(38,41,41,.12);
+    --transicion:all .35s ease;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Helvetica Neue', Arial, sans-serif;
+    background:var(--crema);
+    color:var(--negro);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  /* ---------- TOPBAR ---------- */
+  .topbar{
+    position:fixed;top:0;left:0;right:0;height:64px;
+    background:var(--negro);color:var(--blanco);
+    display:flex;align-items:center;justify-content:space-between;
+    padding:0 24px;z-index:1000;
+    box-shadow:0 2px 10px rgba(0,0,0,.25);
+  }
+  .brand{display:flex;align-items:center;gap:14px}
+  .brand-mark{
+    width:38px;height:38px;display:flex;align-items:center;justify-content:center;
+  }
+  .brand-mark svg{width:100%;height:100%}
+  .brand-text{
+    font-weight:300;letter-spacing:.4em;font-size:18px;
+  }
+  .brand-text span{color:var(--dorado);font-weight:600}
+  .topbar-actions{display:flex;gap:10px;align-items:center}
+  .btn{
+    border:1px solid var(--dorado);background:transparent;color:var(--dorado);
+    padding:8px 16px;border-radius:4px;cursor:pointer;font-size:12px;
+    letter-spacing:.15em;text-transform:uppercase;transition:var(--transicion);
+  }
+  .btn:hover{background:var(--dorado);color:var(--negro)}
+  .btn.solid{background:var(--dorado);color:var(--negro)}
+  .btn.solid:hover{background:var(--dorado-claro)}
+
+  /* ---------- LAYOUT ---------- */
+  .layout{display:flex;margin-top:64px;min-height:calc(100vh - 64px)}
+  .sidebar{
+    width:280px;background:var(--negro);color:var(--blanco);
+    position:fixed;top:64px;bottom:0;left:0;overflow-y:auto;
+    padding:24px 0;border-right:2px solid var(--dorado);
+  }
+  .sidebar h4{
+    color:var(--dorado);font-size:11px;letter-spacing:.25em;
+    padding:14px 24px 8px;text-transform:uppercase;font-weight:600;
+  }
+  .nav-link{
+    display:block;padding:11px 24px;color:#ddd;
+    text-decoration:none;font-size:14px;border-left:3px solid transparent;
+    transition:var(--transicion);
+  }
+  .nav-link:hover{background:#1f1f1f;color:var(--dorado);border-left-color:var(--dorado)}
+  .nav-link.active{background:#1f1f1f;color:var(--dorado);border-left-color:var(--dorado)}
+  .main{flex:1;margin-left:280px;padding:48px 56px 80px;max-width:calc(100% - 280px)}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    background:linear-gradient(135deg,var(--negro) 0%, var(--navy-oscuro) 100%);
+    color:var(--blanco);padding:64px 48px;border-radius:8px;
+    position:relative;overflow:hidden;margin-bottom:48px;
+    border:1px solid rgba(200,160,99,.25);
+  }
+  .hero::before{
+    content:"";position:absolute;top:-50%;right:-10%;width:600px;height:600px;
+    background:radial-gradient(circle,rgba(200,160,99,.15),transparent 70%);
+  }
+  .hero-eyebrow{
+    color:var(--dorado);font-size:12px;letter-spacing:.3em;
+    text-transform:uppercase;margin-bottom:18px;
+  }
+  .hero h1{
+    font-size:48px;font-weight:300;letter-spacing:.03em;line-height:1.15;
+    margin-bottom:20px;
+  }
+  .hero h1 strong{font-weight:600;color:var(--dorado)}
+  .hero p{font-size:17px;max-width:720px;opacity:.9;font-weight:300}
+  .hero-stats{display:flex;gap:48px;margin-top:36px;flex-wrap:wrap}
+  .hero-stat span{display:block;font-size:32px;color:var(--dorado);font-weight:600}
+  .hero-stat small{font-size:12px;letter-spacing:.15em;text-transform:uppercase;opacity:.7}
+
+  /* ---------- SECCIONES ---------- */
+  section{padding:48px 0;border-bottom:1px solid var(--crema-medio);scroll-margin-top:80px}
+  section:last-child{border-bottom:none}
+  .sec-eyebrow{
+    color:var(--dorado-oscuro);font-size:11px;letter-spacing:.3em;
+    text-transform:uppercase;margin-bottom:10px;font-weight:600;
+  }
+  .sec-title{
+    font-size:36px;font-weight:300;color:var(--navy);
+    margin-bottom:12px;letter-spacing:-.01em;
+  }
+  .sec-title strong{font-weight:600;color:var(--dorado-oscuro)}
+  .sec-intro{
+    font-size:16px;color:var(--texto-suave);max-width:820px;margin-bottom:36px;
+  }
+
+  /* ---------- TARJETAS ---------- */
+  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px}
+  .card{
+    background:var(--blanco);border-radius:8px;padding:28px;
+    box-shadow:var(--sombra);transition:var(--transicion);
+    border-top:3px solid var(--dorado);position:relative;
+  }
+  .card:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(0,0,0,.12)}
+  .card-icon{
+    width:48px;height:48px;background:var(--negro);border-radius:50%;
+    display:flex;align-items:center;justify-content:center;color:var(--dorado);
+    font-size:22px;margin-bottom:18px;
+  }
+  .card h3{font-size:18px;font-weight:600;margin-bottom:10px;color:var(--navy)}
+  .card .role-tag{
+    display:inline-block;background:var(--navy);color:var(--dorado);
+    font-size:10px;letter-spacing:.2em;text-transform:uppercase;
+    padding:4px 10px;border-radius:20px;margin-bottom:12px;
+  }
+  .card p, .card li{font-size:14px;color:var(--texto-suave);margin-bottom:8px}
+  .card ul{padding-left:18px;margin:8px 0}
+  .card li{margin-bottom:6px;line-height:1.5}
+
+  /* ---------- VISUALIZACIÓN UNIFORME (figura) ---------- */
+  .uniform-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:24px;margin-top:28px}
+  .uniform-card{
+    background:var(--blanco);border-radius:8px;overflow:hidden;
+    box-shadow:var(--sombra);transition:var(--transicion);
+  }
+  .uniform-card:hover{transform:translateY(-4px)}
+  .uniform-figure{
+    height:340px;background:linear-gradient(180deg,#f7f2e9 0%, #e8dfcd 100%);
+    display:flex;align-items:center;justify-content:center;position:relative;
+  }
+  .uniform-figure svg{height:300px;width:auto}
+  .uniform-figure .badge{
+    position:absolute;top:14px;left:14px;background:var(--negro);color:var(--dorado);
+    font-size:10px;letter-spacing:.2em;text-transform:uppercase;
+    padding:5px 11px;border-radius:20px;
+  }
+  .uniform-body{padding:20px}
+  .uniform-body h4{font-size:15px;font-weight:600;margin-bottom:6px;color:var(--navy)}
+  .uniform-body .area{color:var(--dorado-oscuro);font-size:11px;letter-spacing:.18em;text-transform:uppercase;margin-bottom:10px;display:block}
+  .uniform-body ul{padding-left:16px;margin-top:8px}
+  .uniform-body li{font-size:13px;color:var(--texto-suave);margin-bottom:4px}
+
+  /* ---------- DO / DONT ---------- */
+  .dos-donts{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:24px}
+  @media(max-width:760px){.dos-donts{grid-template-columns:1fr}}
+  .do-box, .dont-box{
+    background:var(--blanco);border-radius:8px;padding:24px;box-shadow:var(--sombra);
+  }
+  .do-box{border-left:4px solid var(--dorado);background:linear-gradient(180deg,#fff 0%, #fdfaf3 100%)}
+  .dont-box{border-left:4px solid var(--navy);background:linear-gradient(180deg,#fff 0%, #f4f6f8 100%)}
+  .do-box h4, .dont-box h4{display:flex;align-items:center;gap:10px;margin-bottom:14px;font-size:15px;letter-spacing:.05em;font-weight:700}
+  .do-box h4{color:var(--dorado-oscuro)}
+  .dont-box h4{color:var(--navy)}
+  .do-box ul, .dont-box ul{padding-left:18px}
+  .do-box li, .dont-box li{font-size:14px;margin-bottom:6px}
+
+  /* ---------- ACORDEÓN ---------- */
+  .accordion{margin-top:20px}
+  .acc-item{
+    background:var(--blanco);border-radius:8px;margin-bottom:12px;
+    box-shadow:var(--sombra);overflow:hidden;
+  }
+  .acc-header{
+    width:100%;text-align:left;padding:18px 24px;background:transparent;border:none;
+    cursor:pointer;font-size:15px;font-weight:600;color:var(--navy);
+    display:flex;justify-content:space-between;align-items:center;
+  }
+  .acc-header:hover{background:#fafafa}
+  .acc-header .acc-icon{
+    width:28px;height:28px;border-radius:50%;background:var(--dorado);
+    color:var(--negro);display:flex;align-items:center;justify-content:center;
+    font-size:14px;transition:var(--transicion);
+  }
+  .acc-item.open .acc-icon{transform:rotate(45deg)}
+  .acc-body{
+    max-height:0;overflow:hidden;transition:max-height .4s ease;padding:0 24px;
+  }
+  .acc-item.open .acc-body{max-height:1500px;padding:0 24px 22px}
+  .acc-body p, .acc-body li{font-size:14px;color:var(--texto-suave);margin-bottom:8px}
+  .acc-body ul{padding-left:18px;margin:6px 0}
+
+  /* ---------- TABS ---------- */
+  .tabs{margin-top:24px}
+  .tab-btns{display:flex;gap:8px;border-bottom:2px solid var(--crema-medio);margin-bottom:24px;flex-wrap:wrap}
+  .tab-btn{
+    background:transparent;border:none;padding:12px 20px;cursor:pointer;
+    font-size:14px;color:var(--texto-suave);font-weight:600;letter-spacing:.05em;
+    border-bottom:2px solid transparent;margin-bottom:-2px;transition:var(--transicion);
+  }
+  .tab-btn.active{color:var(--dorado-oscuro);border-bottom-color:var(--dorado)}
+  .tab-btn:hover{color:var(--negro)}
+  .tab-content{display:none}
+  .tab-content.active{display:block;animation:fadeIn .4s ease}
+  @keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+
+  /* ---------- VALORES DECIDE ---------- */
+  .decide{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px;margin-top:24px}
+  .decide-item{
+    background:var(--negro);color:var(--blanco);padding:22px 16px;border-radius:8px;
+    text-align:center;transition:var(--transicion);cursor:default;border-top:3px solid var(--dorado);
+  }
+  .decide-item:hover{transform:translateY(-4px);background:#1a1a1a}
+  .decide-item .letter{
+    font-size:38px;color:var(--dorado);font-weight:300;display:block;margin-bottom:6px;
+  }
+  .decide-item h5{font-size:13px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px}
+  .decide-item p{font-size:11px;opacity:.8;line-height:1.4}
+
+  /* ---------- TARJETA QR ---------- */
+  .qr-demo{
+    background:linear-gradient(135deg,var(--negro) 0%, var(--navy) 100%);
+    color:var(--blanco);padding:28px;border-radius:12px;
+    display:grid;grid-template-columns:1fr auto;gap:32px;align-items:center;margin-top:24px;
+    border:1px solid var(--dorado-oscuro);
+  }
+  @media(max-width:680px){.qr-demo{grid-template-columns:1fr}}
+  .qr-card-mock{
+    background:var(--blanco);color:var(--negro);width:100%;max-width:380px;
+    aspect-ratio:1.7/1;border-radius:10px;padding:22px;
+    display:flex;flex-direction:column;justify-content:space-between;
+    box-shadow:0 12px 30px rgba(0,0,0,.4);
+  }
+  .qr-card-mock .top{display:flex;justify-content:space-between;align-items:flex-start}
+  .qr-card-mock .top svg{width:42px;height:42px}
+  .qr-card-mock .qr-square{
+    width:64px;height:64px;background:repeating-conic-gradient(var(--negro) 0% 25%, var(--blanco) 0% 50%) 50%/12px 12px;
+    border:2px solid var(--negro);
+  }
+  .qr-card-mock .name{font-size:14px;font-weight:600;letter-spacing:.05em}
+  .qr-card-mock .role{font-size:10px;color:var(--dorado-oscuro);letter-spacing:.15em;text-transform:uppercase}
+  .qr-card-mock .contact{font-size:10px;color:var(--texto-suave);margin-top:4px}
+
+  /* ---------- TABLA ---------- */
+  table{width:100%;border-collapse:collapse;background:var(--blanco);border-radius:8px;overflow:hidden;box-shadow:var(--sombra);margin-top:18px}
+  th,td{padding:14px 18px;text-align:left;font-size:14px;border-bottom:1px solid var(--crema-medio)}
+  th{background:var(--navy);color:var(--dorado);font-size:11px;letter-spacing:.2em;text-transform:uppercase;font-weight:600}
+  tr:last-child td{border-bottom:none}
+  tr:nth-child(even){background:#faf7f0}
+  td strong{color:var(--navy)}
+
+  /* ---------- EDITABLE ---------- */
+  [contenteditable="true"]{
+    outline:none;transition:var(--transicion);border-radius:4px;
+  }
+  [contenteditable="true"]:hover{background:rgba(200,160,99,.08);box-shadow:inset 0 0 0 1px rgba(200,160,99,.3)}
+  [contenteditable="true"]:focus{background:rgba(200,160,99,.12);box-shadow:inset 0 0 0 1.5px var(--dorado)}
+  .edit-banner{
+    background:var(--dorado);color:var(--negro);padding:10px 24px;
+    text-align:center;font-size:12px;letter-spacing:.15em;text-transform:uppercase;
+    font-weight:600;display:none;
+  }
+  body.edit-mode .edit-banner{display:block}
+  body.edit-mode [contenteditable="true"]{
+    background:rgba(200,160,99,.08);
+    box-shadow:inset 0 0 0 1px rgba(200,160,99,.3);
+  }
+
+  /* ---------- BRAND BLOCK ---------- */
+  .brand-block{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;margin-top:24px}
+  .color-swatch{
+    background:var(--blanco);border-radius:8px;overflow:hidden;box-shadow:var(--sombra);
+  }
+  .color-swatch .chip{height:120px}
+  .color-swatch .meta{padding:16px}
+  .color-swatch h5{font-size:14px;font-weight:600;margin-bottom:4px}
+  .color-swatch .code{font-family:'Courier New',monospace;font-size:12px;color:var(--texto-suave)}
+
+  /* ---------- LOGO USAGE ---------- */
+  .logo-usage{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:18px}
+  @media(max-width:680px){.logo-usage{grid-template-columns:1fr}}
+  .logo-cell{
+    border-radius:8px;padding:36px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;min-height:200px;
+  }
+  .logo-cell.dark{background:var(--negro);color:var(--blanco)}
+  .logo-cell.light{background:var(--blanco);color:var(--negro);border:1px solid var(--crema-medio)}
+  .logo-cell.bad{background:var(--navy);color:var(--blanco);position:relative}
+  .logo-cell.bad::after{
+    content:"NO";position:absolute;top:10px;right:14px;background:var(--blanco);color:var(--navy);
+    font-size:11px;font-weight:700;padding:3px 8px;border-radius:20px;letter-spacing:.1em;
+  }
+  .logo-cell.good{background:var(--crema);position:relative}
+  .logo-cell.good::after{
+    content:"OK";position:absolute;top:10px;right:14px;background:var(--dorado);color:var(--negro);
+    font-size:11px;font-weight:700;padding:3px 8px;border-radius:20px;letter-spacing:.1em;
+  }
+  .logo-cell svg{height:60px;width:auto}
+  .logo-cell .caption{font-size:11px;letter-spacing:.15em;text-transform:uppercase;opacity:.8}
+
+  /* ---------- PROTOCOLO ---------- */
+  .protocol-steps{counter-reset:step;margin-top:24px}
+  .protocol-step{
+    background:var(--blanco);border-radius:8px;padding:20px 24px 20px 70px;
+    box-shadow:var(--sombra);margin-bottom:14px;position:relative;
+  }
+  .protocol-step::before{
+    counter-increment:step;content:counter(step);
+    position:absolute;left:20px;top:50%;transform:translateY(-50%);
+    width:36px;height:36px;border-radius:50%;background:var(--dorado);color:var(--negro);
+    font-size:16px;font-weight:700;display:flex;align-items:center;justify-content:center;
+  }
+  .protocol-step h5{font-size:14px;font-weight:600;margin-bottom:4px;color:var(--navy)}
+  .protocol-step p{font-size:13px;color:var(--texto-suave)}
+
+  /* ---------- FOOTER ---------- */
+  footer{
+    background:var(--negro);color:#bbb;padding:36px 56px;margin-left:280px;
+    border-top:2px solid var(--dorado);
+  }
+  footer .ft-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:24px;margin-bottom:24px}
+  footer h6{color:var(--dorado);font-size:11px;letter-spacing:.25em;text-transform:uppercase;margin-bottom:10px}
+  footer p, footer a{font-size:13px;color:#bbb;text-decoration:none}
+  footer .ft-bottom{border-top:1px solid #333;padding-top:18px;font-size:11px;letter-spacing:.1em;text-transform:uppercase;opacity:.6;text-align:center}
+
+  /* ---------- RESPONSIVE ---------- */
+  .menu-toggle{display:none;background:transparent;border:1px solid var(--dorado);color:var(--dorado);padding:6px 12px;border-radius:4px;cursor:pointer}
+  @media(max-width:980px){
+    .menu-toggle{display:inline-block}
+    .sidebar{transform:translateX(-100%);transition:transform .3s ease;z-index:999}
+    .sidebar.open{transform:translateX(0)}
+    .main{margin-left:0;padding:32px 24px 60px;max-width:100%}
+    footer{margin-left:0;padding:32px 24px}
+    .hero{padding:44px 28px}
+    .hero h1{font-size:34px}
+  }
+
+  /* ---------- PRINT ---------- */
+  @media print{
+    .topbar,.sidebar,.topbar-actions,.menu-toggle{display:none!important}
+    .main{margin-left:0;padding:0;max-width:100%}
+    .card,.acc-item,.uniform-card{box-shadow:none;border:1px solid #eee;page-break-inside:avoid}
+    .acc-body{max-height:none!important;padding:0 24px 22px!important}
+    section{page-break-inside:avoid}
+    body{background:white}
+  }
+</style>
+</head>
+<body>
+
+<!-- ============= TOPBAR ============= -->
+<header class="topbar">
+  <div class="brand">
+    <button class="menu-toggle" onclick="document.querySelector('.sidebar').classList.toggle('open')">☰</button>
+    <div class="brand-mark">
+      <!-- Logo IMPULSA -->
+      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <polygon points="50,20 80,45 80,53 50,28 20,53 20,45" fill="#BA8747"/>
+        <polygon points="50,40 80,65 80,73 50,48 20,73 20,65" fill="#BA8747"/>
+        <polygon points="50,60 80,85 80,93 50,68 20,93 20,85" fill="#BA8747"/>
+      </svg>
+    </div>
+    <div class="brand-text">IM<span>P</span>ULSA</div>
+  </div>
+  <div class="topbar-actions">
+    <button class="btn" id="editToggle" onclick="toggleEdit()">✎ Editar</button>
+    <button class="btn solid" onclick="window.print()">⬇ Imprimir / PDF</button>
+  </div>
+</header>
+
+<div class="edit-banner">
+  Modo edición activado · Haz clic sobre cualquier texto para modificarlo · Vuelve a presionar "Editar" para salir
+</div>
+
+<!-- ============= LAYOUT ============= -->
+<div class="layout">
+
+  <!-- ============= SIDEBAR ============= -->
+  <aside class="sidebar">
+    <h4>Introducción</h4>
+    <a class="nav-link" href="#bienvenida">Bienvenida</a>
+    <a class="nav-link" href="#marca">Identidad de marca</a>
+    <a class="nav-link" href="#valores">Valores DECIDE</a>
+
+    <h4>Imagen Profesional</h4>
+    <a class="nav-link" href="#uniformes">Uniformes por área</a>
+    <a class="nav-link" href="#imagen-personal">Imagen personal</a>
+    <a class="nav-link" href="#tarjeta-qr">Tarjeta de presentación QR</a>
+
+    <h4>Comunicación</h4>
+    <a class="nav-link" href="#comunicacion">Comunicación asertiva</a>
+    <a class="nav-link" href="#correo">Protocolo correo</a>
+    <a class="nav-link" href="#whatsapp">Protocolo WhatsApp</a>
+
+    <h4>Protocolo y Servicio</h4>
+    <a class="nav-link" href="#eventos">Etiqueta y eventos</a>
+    <a class="nav-link" href="#clientes">Atención a clientes</a>
+    <a class="nav-link" href="#alimentos">Servicio de alimentos</a>
+    <a class="nav-link" href="#visitas">Atención a visitas</a>
+    <a class="nav-link" href="#saludo">El saludo</a>
+    <a class="nav-link" href="#trato">Trato a las personas</a>
+
+    <h4>Marca</h4>
+    <a class="nav-link" href="#uso-marca">Correcto uso de la marca</a>
+  </aside>
+
+  <!-- ============= MAIN ============= -->
+  <main class="main">
+
+    <!-- ===== HERO ===== -->
+    <div class="hero" id="bienvenida">
+      <div class="hero-eyebrow">Manual de Imagen Corporativa</div>
+      <h1>La <strong>imagen</strong> que proyectamos<br/>es la confianza que generamos.</h1>
+      <p contenteditable="true">Este manual reúne los lineamientos de presentación personal, comunicación, etiqueta y protocolo que distinguen al equipo IMPULSA. Su propósito es asegurar coherencia, profesionalismo y un servicio de excelencia en cada interacción con clientes, inversionistas, proveedores, contratistas y compañeros.</p>
+      <div class="hero-stats">
+        <div class="hero-stat"><span>18</span><small>Años de trayectoria</small></div>
+        <div class="hero-stat"><span>43</span><small>Colaboradores</small></div>
+        <div class="hero-stat"><span>3</span><small>Unidades de negocio</small></div>
+        <div class="hero-stat"><span>6</span><small>Valores DECIDE</small></div>
+      </div>
+    </div>
+
+    <!-- ===== MARCA ===== -->
+    <section id="marca">
+      <div class="sec-eyebrow">01 · Identidad</div>
+      <h2 class="sec-title">Quiénes <strong>somos</strong></h2>
+      <p class="sec-intro" contenteditable="true">
+        IMPULSA es una empresa que asesora, desarrolla, comercializa y gestiona proyectos inmobiliarios únicos y de alto impacto financiero. Nuestro propósito es <em>impulsar la inversión para transformar vidas, creando experiencias únicas</em>. Cada colaborador es embajador de esta promesa.
+      </p>
+      <div class="cards">
+        <div class="card">
+          <div class="card-icon">◇</div>
+          <h3>Propósito</h3>
+          <p contenteditable="true">Impulsar la inversión para transformar vidas, creando experiencias únicas.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">◆</div>
+          <h3>Visión</h3>
+          <p contenteditable="true">Transformar ciudades, conectar personas y construir legados a través de desarrollos inmobiliarios que marcan tendencia.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">▲</div>
+          <h3>Misión</h3>
+          <p contenteditable="true">Crear oportunidades únicas de inversión, distinguidas por credibilidad y confianza, gracias a la pasión y compromiso de nuestro equipo.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== VALORES DECIDE ===== -->
+    <section id="valores">
+      <div class="sec-eyebrow">02 · Valores</div>
+      <h2 class="sec-title">Vivimos <strong>DECIDE</strong></h2>
+      <p class="sec-intro">Cada decisión, conversación y entrega refleja nuestros valores. Son la base del trato hacia clientes, compañeros y aliados.</p>
+      <div class="decide">
+        <div class="decide-item"><span class="letter">D</span><h5>Determinación</h5><p contenteditable="true">Avanzamos con foco hasta cumplir las metas.</p></div>
+        <div class="decide-item"><span class="letter">E</span><h5>Excelencia</h5><p contenteditable="true">Altos estándares en cada detalle.</p></div>
+        <div class="decide-item"><span class="letter">C</span><h5>Compromiso</h5><p contenteditable="true">Cumplimos lo que prometemos.</p></div>
+        <div class="decide-item"><span class="letter">I</span><h5>Integridad</h5><p contenteditable="true">Actuamos con honestidad y ética.</p></div>
+        <div class="decide-item"><span class="letter">D</span><h5>Dinamismo</h5><p contenteditable="true">Nos adaptamos con energía y agilidad.</p></div>
+        <div class="decide-item"><span class="letter">E</span><h5>Empatía</h5><p contenteditable="true">Escuchamos y comprendemos a las personas.</p></div>
+      </div>
+    </section>
+
+    <!-- ===== UNIFORMES ===== -->
+    <section id="uniformes">
+      <div class="sec-eyebrow">03 · Imagen Profesional</div>
+      <h2 class="sec-title">Uniformes por <strong>área</strong></h2>
+      <p class="sec-intro">Cada área cuenta con un código de vestimenta que combina profesionalismo, comodidad y la identidad visual de IMPULSA. El uniforme refleja orden, jerarquía y respeto al cliente.</p>
+
+      <div class="uniform-grid">
+
+        <!-- Administración -->
+        <div class="uniform-card">
+          <div class="uniform-figure">
+            <span class="badge">Business Casual</span>
+            <!-- Figura: Administración - Mujer con blazer + Hombre con camisa -->
+            <svg viewBox="0 0 220 320" xmlns="http://www.w3.org/2000/svg">
+              <!-- Mujer -->
+              <g transform="translate(10,0)">
+                <circle cx="50" cy="40" r="22" fill="#E8C9A0"/>
+                <path d="M28,45 Q50,15 72,45 Q72,30 50,18 Q28,30 28,45" fill="#3a2b1f"/>
+                <path d="M30,75 L70,75 L78,180 L22,180 Z" fill="#214A59"/>
+                <path d="M30,75 L35,140 L20,180 L22,180 Z M70,75 L65,140 L80,180 L78,180 Z" fill="#0F2330"/>
+                <rect x="46" y="80" width="8" height="100" fill="#fff"/>
+                <path d="M30,180 L78,180 L75,290 L33,290 Z" fill="#5a5a5a"/>
+                <rect x="34" y="290" width="14" height="20" fill="#1a1a1a"/>
+                <rect x="60" y="290" width="14" height="20" fill="#1a1a1a"/>
+              </g>
+              <!-- Hombre -->
+              <g transform="translate(110,0)">
+                <circle cx="50" cy="40" r="22" fill="#D4A77A"/>
+                <path d="M30,30 Q50,15 70,30 L70,42 L30,42 Z" fill="#2a1a0f"/>
+                <path d="M32,72 L68,72 L78,180 L22,180 Z" fill="#BA8747"/>
+                <rect x="46" y="72" width="8" height="60" fill="#fff"/>
+                <path d="M50,72 L46,90 L50,108 L54,90 Z" fill="#214A59"/>
+                <path d="M30,180 L78,180 L75,290 L33,290 Z" fill="#1a1a1a"/>
+                <rect x="34" y="290" width="14" height="20" fill="#3a2b1f"/>
+                <rect x="60" y="290" width="14" height="20" fill="#3a2b1f"/>
+              </g>
+            </svg>
+          </div>
+          <div class="uniform-body">
+            <span class="area">Administración</span>
+            <h4>Business Casual</h4>
+            <ul>
+              <li><strong>Mujeres:</strong> blusa elegante, blazer o cárdigan, pantalón de vestir o falda hasta la rodilla, zapato cerrado o sandalia formal.</li>
+              <li><strong>Hombres:</strong> camisa formal o polo IMPULSA, pantalón de vestir, cinturón, zapato cerrado tipo loafer o derby.</li>
+              <li>Colores neutros: negro, gris, navy, beige, blanco. Dorado IMPULSA como acento.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Asesores Comerciales -->
+        <div class="uniform-card">
+          <div class="uniform-figure">
+            <span class="badge">Business Casual</span>
+            <svg viewBox="0 0 220 320" xmlns="http://www.w3.org/2000/svg">
+              <!-- Asesora -->
+              <g transform="translate(10,0)">
+                <circle cx="50" cy="40" r="22" fill="#E8C9A0"/>
+                <path d="M28,45 Q50,15 72,45 Q72,55 60,60 L40,60 Q28,55 28,45" fill="#4a2f1a"/>
+                <path d="M30,75 L70,75 L78,200 L22,200 Z" fill="#0B0B0B"/>
+                <rect x="46" y="78" width="8" height="105" fill="#BA8747"/>
+                <path d="M30,200 L78,200 L75,290 L33,290 Z" fill="#1a1a1a"/>
+                <rect x="34" y="290" width="14" height="20" fill="#3a2b1f"/>
+                <rect x="60" y="290" width="14" height="20" fill="#3a2b1f"/>
+                <!-- Pin dorado -->
+                <circle cx="40" cy="90" r="3" fill="#BA8747"/>
+              </g>
+              <!-- Asesor -->
+              <g transform="translate(110,0)">
+                <circle cx="50" cy="40" r="22" fill="#D4A77A"/>
+                <path d="M30,30 Q50,15 70,30 L70,42 L30,42 Z" fill="#1a1a1a"/>
+                <path d="M32,72 L68,72 L78,200 L22,200 Z" fill="#214A59"/>
+                <rect x="46" y="72" width="8" height="80" fill="#fff"/>
+                <path d="M50,72 L42,110 L50,130 L58,110 Z" fill="#BA8747"/>
+                <path d="M30,200 L78,200 L75,290 L33,290 Z" fill="#2a2a2a"/>
+                <rect x="34" y="290" width="14" height="20" fill="#1a1a1a"/>
+                <rect x="60" y="290" width="14" height="20" fill="#1a1a1a"/>
+                <circle cx="40" cy="90" r="3" fill="#BA8747"/>
+              </g>
+            </svg>
+          </div>
+          <div class="uniform-body">
+            <span class="area">Asesores Comerciales</span>
+            <h4>Business Casual + Pin marca</h4>
+            <ul>
+              <li><strong>Mujeres:</strong> vestido formal, blusa con blazer, pantalón sastre. Pin dorado IMPULSA siempre visible.</li>
+              <li><strong>Hombres:</strong> camisa formal con corbata dorada o navy, pantalón de vestir, saco opcional según evento.</li>
+              <li>Tarjeta de presentación QR siempre a la mano.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Proyectos -->
+        <div class="uniform-card">
+          <div class="uniform-figure" style="background:linear-gradient(180deg,#f0ead9 0%, #d8cfb5 100%)">
+            <span class="badge">Casual + EPP</span>
+            <svg viewBox="0 0 220 320" xmlns="http://www.w3.org/2000/svg">
+              <g transform="translate(10,0)">
+                <!-- Casco -->
+                <path d="M28,40 Q50,10 72,40 L72,46 L28,46 Z" fill="#BA8747"/>
+                <rect x="28" y="44" width="44" height="4" fill="#8E6432"/>
+                <circle cx="50" cy="55" r="18" fill="#D4A77A"/>
+                <!-- Camisa polo + chaleco -->
+                <path d="M30,80 L70,80 L78,200 L22,200 Z" fill="#1a1a1a"/>
+                <path d="M22,90 L34,85 L34,170 L22,180 Z M70,85 L78,90 L78,180 L66,170 Z" fill="#BA8747"/>
+                <rect x="46" y="80" width="8" height="50" fill="#1a1a1a"/>
+                <!-- Pantalón cargo -->
+                <path d="M30,200 L78,200 L75,290 L33,290 Z" fill="#3a3a3a"/>
+                <rect x="38" y="220" width="12" height="14" fill="#2a2a2a"/>
+                <rect x="58" y="220" width="12" height="14" fill="#2a2a2a"/>
+                <!-- Botas -->
+                <rect x="32" y="290" width="18" height="22" fill="#3a2b1f"/>
+                <rect x="58" y="290" width="18" height="22" fill="#3a2b1f"/>
+              </g>
+              <g transform="translate(110,0)">
+                <path d="M28,40 Q50,10 72,40 L72,46 L28,46 Z" fill="#BA8747"/>
+                <rect x="28" y="44" width="44" height="4" fill="#8E6432"/>
+                <circle cx="50" cy="55" r="18" fill="#E8C9A0"/>
+                <path d="M30,80 L70,80 L78,200 L22,200 Z" fill="#1a1a1a"/>
+                <path d="M22,90 L34,85 L34,170 L22,180 Z M70,85 L78,90 L78,180 L66,170 Z" fill="#BA8747"/>
+                <rect x="46" y="80" width="8" height="50" fill="#1a1a1a"/>
+                <path d="M30,200 L78,200 L75,290 L33,290 Z" fill="#3a3a3a"/>
+                <rect x="38" y="220" width="12" height="14" fill="#2a2a2a"/>
+                <rect x="58" y="220" width="12" height="14" fill="#2a2a2a"/>
+                <rect x="32" y="290" width="18" height="22" fill="#3a2b1f"/>
+                <rect x="58" y="290" width="18" height="22" fill="#3a2b1f"/>
+              </g>
+            </svg>
+          </div>
+          <div class="uniform-body">
+            <span class="area">Proyectos</span>
+            <h4>Casual con equipo de protección</h4>
+            <ul>
+              <li>Polo o camisa IMPULSA, pantalón cargo o jean oscuro, botas de seguridad.</li>
+              <li><strong>EPP obligatorio en obra:</strong> casco dorado IMPULSA, chaleco reflectivo, lentes de seguridad y gafete.</li>
+              <li>En oficina: polo IMPULSA + pantalón formal.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Administrativos Servicio -->
+        <div class="uniform-card">
+          <div class="uniform-figure" style="background:linear-gradient(180deg,#ede7d8 0%, #c8bd9d 100%)">
+            <span class="badge">Uniforme Designado</span>
+            <svg viewBox="0 0 220 320" xmlns="http://www.w3.org/2000/svg">
+              <!-- Recepcionista -->
+              <g transform="translate(10,0)">
+                <circle cx="50" cy="40" r="22" fill="#E8C9A0"/>
+                <path d="M28,45 Q50,15 72,45 Q72,55 60,60 L40,60 Q28,55 28,45" fill="#3a2b1f"/>
+                <!-- Blusa blanca + falda navy -->
+                <path d="M32,75 L68,75 L75,150 L25,150 Z" fill="#FFFFFF"/>
+                <path d="M50,75 L46,90 L50,110 L54,90 Z" fill="#BA8747"/>
+                <path d="M25,150 L75,150 L78,230 L22,230 Z" fill="#214A59"/>
+                <!-- Bufanda dorada -->
+                <path d="M30,75 L70,75 L66,82 L34,82 Z" fill="#BA8747"/>
+                <!-- Piernas medias -->
+                <path d="M30,230 L78,230 L75,290 L33,290 Z" fill="#D4A77A"/>
+                <rect x="34" y="290" width="14" height="20" fill="#1a1a1a"/>
+                <rect x="60" y="290" width="14" height="20" fill="#1a1a1a"/>
+              </g>
+              <!-- Mensajero / Mantenimiento -->
+              <g transform="translate(110,0)">
+                <path d="M30,35 Q50,18 70,35 L72,46 L28,46 Z" fill="#1a1a1a"/>
+                <ellipse cx="50" cy="32" rx="22" ry="6" fill="#BA8747"/>
+                <circle cx="50" cy="48" r="18" fill="#B8866A"/>
+                <!-- Polo gris + parche dorado -->
+                <path d="M32,72 L68,72 L78,200 L22,200 Z" fill="#5a5a5a"/>
+                <rect x="38" y="85" width="14" height="10" fill="#BA8747"/>
+                <path d="M30,200 L78,200 L75,290 L33,290 Z" fill="#1a1a1a"/>
+                <rect x="32" y="290" width="18" height="22" fill="#2a2a2a"/>
+                <rect x="58" y="290" width="18" height="22" fill="#2a2a2a"/>
+              </g>
+            </svg>
+          </div>
+          <div class="uniform-body">
+            <span class="area">Servicio · Recepción · Mensajería · Mantenimiento</span>
+            <h4>Uniforme designado IMPULSA</h4>
+            <ul>
+              <li><strong>Recepción:</strong> blusa blanca o crema, falda o pantalón navy, bufanda/pañuelo dorado IMPULSA, zapato cerrado bajo o tacón medio.</li>
+              <li><strong>Mensajería:</strong> polo gris IMPULSA con logo bordado dorado, pantalón negro, zapato/tenis negro cerrado, gorra IMPULSA opcional.</li>
+              <li><strong>Mantenimiento:</strong> camisa o polo IMPULSA, pantalón cargo, botas de seguridad, identificación visible.</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ===== IMAGEN PERSONAL ===== -->
+    <section id="imagen-personal">
+      <div class="sec-eyebrow">04 · Imagen personal</div>
+      <h2 class="sec-title">Cuidado <strong>personal</strong></h2>
+      <p class="sec-intro">La presentación personal es nuestra primera carta de presentación. En IMPULSA cuidamos cada detalle: refleja respeto al cliente, al equipo y a uno mismo.</p>
+
+      <div class="tabs">
+        <div class="tab-btns">
+          <button class="tab-btn active" data-tab="accesorios">Accesorios</button>
+          <button class="tab-btn" data-tab="maquillaje">Maquillaje</button>
+          <button class="tab-btn" data-tab="higiene">Higiene</button>
+          <button class="tab-btn" data-tab="unas">Uñas</button>
+        </div>
+
+        <div class="tab-content active" id="accesorios">
+          <div class="dos-donts">
+            <div class="do-box">
+              <h4>✓ Recomendado</h4>
+              <ul>
+                <li>Reloj clásico, anillo discreto, aretes pequeños o medianos.</li>
+                <li>Cinturón formal acorde al calzado.</li>
+                <li>Bolso, portafolio o maletín ejecutivo en tonos neutros.</li>
+                <li>Pin dorado IMPULSA (asesores y voceros) siempre visible.</li>
+                <li>Lentes ópticos limpios, montura discreta.</li>
+              </ul>
+            </div>
+            <div class="dont-box">
+              <h4>✗ Evitar</h4>
+              <ul>
+                <li>Joyería excesiva, ruidosa o llamativa.</li>
+                <li>Piercings visibles en cara que distraigan de la conversación.</li>
+                <li>Gorras o sombreros dentro de oficina (excepto EPP en obra).</li>
+                <li>Mochilas deportivas en reuniones con clientes.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="tab-content" id="maquillaje">
+          <div class="dos-donts">
+            <div class="do-box">
+              <h4>✓ Recomendado</h4>
+              <ul>
+                <li>Maquillaje natural, fresco y profesional.</li>
+                <li>Base que iguale el tono de piel, rubor sutil.</li>
+                <li>Labial en tonos neutros, nude, rosa o vino discreto.</li>
+                <li>Cejas peinadas y definidas.</li>
+              </ul>
+            </div>
+            <div class="dont-box">
+              <h4>✗ Evitar</h4>
+              <ul>
+                <li>Sombras brillantes, glitter o colores neón.</li>
+                <li>Pestañas exageradas o postizas voluminosas.</li>
+                <li>Labiales muy oscuros, fluorescentes o con escarcha.</li>
+                <li>Maquillaje corrido o sin retoque durante el día.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="tab-content" id="higiene">
+          <div class="dos-donts">
+            <div class="do-box">
+              <h4>✓ Recomendado</h4>
+              <ul>
+                <li>Ducha diaria, uso de desodorante y perfume suave.</li>
+                <li>Cabello limpio, peinado y bien cuidado. En obra recogido.</li>
+                <li>Barba afeitada o perfectamente arreglada.</li>
+                <li>Aliento fresco: usar enjuague o mentas tras las comidas.</li>
+                <li>Ropa limpia, planchada y sin manchas.</li>
+              </ul>
+            </div>
+            <div class="dont-box">
+              <h4>✗ Evitar</h4>
+              <ul>
+                <li>Perfumes/lociones muy intensos que invadan el espacio.</li>
+                <li>Cabello sin lavar, con tintes desvanecidos o desordenado.</li>
+                <li>Zapatos sucios o desgastados.</li>
+                <li>Ropa arrugada, manchada o con olor a comida o tabaco.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="tab-content" id="unas">
+          <div class="dos-donts">
+            <div class="do-box">
+              <h4>✓ Recomendado</h4>
+              <ul>
+                <li>Uñas limpias, parejas y bien limadas.</li>
+                <li>Esmalte en tonos nude, rosa pálido, beige, vino, rojo discreto o francés.</li>
+                <li>Largo moderado, funcional para escribir y manipular documentos.</li>
+                <li>En obra: uñas cortas y sin acrílicos largos.</li>
+              </ul>
+            </div>
+            <div class="dont-box">
+              <h4>✗ Evitar</h4>
+              <ul>
+                <li>Diseños extravagantes, escarchados, piedras o stickers.</li>
+                <li>Colores neón, negro brillante o fluorescentes.</li>
+                <li>Esmalte saltado o sin mantenimiento.</li>
+                <li>Uñas excesivamente largas que dificulten tareas operativas.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== TARJETA QR ===== -->
+    <section id="tarjeta-qr">
+      <div class="sec-eyebrow">05 · Networking</div>
+      <h2 class="sec-title">Tarjeta de presentación <strong>QR</strong></h2>
+      <p class="sec-intro">La tarjeta digital IMPULSA es sostenible, dinámica y siempre actualizada. Permite compartir tus datos al instante, con un solo escaneo, y proyecta una imagen moderna acorde a una empresa que marca tendencia.</p>
+
+      <div class="qr-demo">
+        <div>
+          <h3 style="color:var(--dorado);font-weight:300;font-size:24px;margin-bottom:12px">Una tarjeta. Toda tu información.</h3>
+          <p style="opacity:.85;margin-bottom:14px" contenteditable="true">Al escanear el QR el cliente recibe automáticamente: nombre, puesto, correo, WhatsApp, sitio web y enlace al portafolio digital de IMPULSA.</p>
+          <ul style="padding-left:18px;opacity:.85;font-size:14px">
+            <li style="margin-bottom:4px">QR centralizado, fácilmente escaneable desde cualquier celular.</li>
+            <li style="margin-bottom:4px">Versión digital (vCard) compartible vía WhatsApp o correo.</li>
+            <li style="margin-bottom:4px">Diseño 100% digital · sin impresión física.</li>
+            <li>Solicita la tuya a Recursos Humanos al ingresar a tu puesto.</li>
+          </ul>
+        </div>
+        <div class="qr-card-mock">
+          <div class="top">
+            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+              <polygon points="50,20 80,45 80,53 50,28 20,53 20,45" fill="#BA8747"/>
+              <polygon points="50,40 80,65 80,73 50,48 20,73 20,65" fill="#BA8747"/>
+              <polygon points="50,60 80,85 80,93 50,68 20,93 20,85" fill="#BA8747"/>
+            </svg>
+            <div class="qr-square"></div>
+          </div>
+          <div>
+            <div class="name" contenteditable="true">Nombre Apellido</div>
+            <div class="role" contenteditable="true">Cargo · IMPULSA</div>
+            <div class="contact" contenteditable="true">nombre@impulsa.gt · +502 0000-0000</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== COMUNICACIÓN ASERTIVA ===== -->
+    <section id="comunicacion">
+      <div class="sec-eyebrow">06 · Comunicación asertiva</div>
+      <h2 class="sec-title">Hablamos <strong>claro</strong>, comunicamos con propósito</h2>
+      <p class="sec-intro">La comunicación asertiva en IMPULSA combina cortesía, claridad y firmeza. Cada canal tiene una función específica: usarlos correctamente refleja orden, respeto al tiempo del otro y profesionalismo.</p>
+
+      <h3 style="margin:30px 0 12px;font-weight:600;color:var(--navy);font-size:18px">¿Para qué usamos cada canal?</h3>
+      <table>
+        <thead>
+          <tr><th>Canal</th><th>Para qué sirve</th><th>Cuándo NO usarlo</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Correo electrónico</strong></td>
+            <td>Comunicación formal, acuerdos, propuestas, envío de documentos, trazabilidad oficial.</td>
+            <td>Para urgencias inmediatas o conversaciones casuales internas.</td>
+          </tr>
+          <tr>
+            <td><strong>WhatsApp / Mensajería</strong></td>
+            <td>Coordinaciones rápidas, confirmaciones, recordatorios, alertas operativas.</td>
+            <td>Para enviar contratos firmados, propuestas formales o información confidencial sensible.</td>
+          </tr>
+          <tr>
+            <td><strong>Llamada telefónica</strong></td>
+            <td>Aclarar dudas urgentes, conversaciones delicadas, cerrar acuerdos puntuales.</td>
+            <td>Cuando hay diferencia horaria significativa o el cliente prefirió otro canal.</td>
+          </tr>
+          <tr>
+            <td><strong>Reunión presencial / virtual</strong></td>
+            <td>Decisiones complejas, presentación de proyectos, alineaciones de equipo.</td>
+            <td>Para mensajes que pueden resolverse en un correo de 3 líneas.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- CORREO -->
+      <h3 id="correo" style="margin:36px 0 12px;font-weight:600;color:var(--negro);font-size:20px">Protocolo de correo electrónico</h3>
+      <div class="protocol-steps">
+        <div class="protocol-step">
+          <h5>Asunto claro y específico</h5>
+          <p contenteditable="true">Ej.: "Propuesta Verve – Revisión planos torre A · 19 mayo". Evitar "Hola" o "Urgente".</p>
+        </div>
+        <div class="protocol-step">
+          <h5>Saludo cordial y nombre del destinatario</h5>
+          <p contenteditable="true">"Buenos días, [Nombre]:" / "Estimado/a [Sr./Sra. Apellido]:" según nivel de confianza.</p>
+        </div>
+        <div class="protocol-step">
+          <h5>Cuerpo breve, ordenado y al grano</h5>
+          <p contenteditable="true">Un párrafo de contexto + bullets si hay más de tres puntos. Una idea por párrafo. Sin negritas excesivas.</p>
+        </div>
+        <div class="protocol-step">
+          <h5>Acción esperada y plazo</h5>
+          <p contenteditable="true">"Agradezco tu confirmación antes del viernes 22 a las 16:00 hrs." El lector debe saber qué se espera de él.</p>
+        </div>
+        <div class="protocol-step">
+          <h5>Cierre cordial</h5>
+          <p contenteditable="true">"Quedo atento/a a tus comentarios. Saludos cordiales,"</p>
+        </div>
+        <div class="protocol-step">
+          <h5>Firma corporativa IMPULSA</h5>
+          <p contenteditable="true">Nombre completo · Cargo · IMPULSA · Teléfono directo · www.impulsa.gt · Logo en formato aprobado.</p>
+        </div>
+        <div class="protocol-step">
+          <h5>Revisión antes de enviar</h5>
+          <p contenteditable="true">Verificar destinatarios (CC/CCO), ortografía, archivos adjuntos y que no se respondió "Responder a todos" por error.</p>
+        </div>
+      </div>
+
+      <!-- WHATSAPP -->
+      <h3 id="whatsapp" style="margin:36px 0 12px;font-weight:600;color:var(--negro);font-size:20px">Protocolo de WhatsApp</h3>
+      <div class="dos-donts">
+        <div class="do-box">
+          <h4>✓ Buenas prácticas</h4>
+          <ul>
+            <li>Saluda y preséntate la primera vez ("Buenos días, [Nombre], le escribe [Tu nombre] de IMPULSA").</li>
+            <li>Usa horario laboral: 8:00 a 18:00 hrs. Lunes a viernes; sábado solo urgencias.</li>
+            <li>Mensajes concretos, una idea por mensaje. Evita 10 audios seguidos.</li>
+            <li>Audios cortos (máx. 1 min) cuando el cliente acepte ese canal.</li>
+            <li>Foto de perfil corporativa o profesional, con fondo limpio.</li>
+            <li>Confirma recepción y siguiente paso.</li>
+          </ul>
+        </div>
+        <div class="dont-box">
+          <h4>✗ Evitar</h4>
+          <ul>
+            <li>Stickers, memes o GIFs en chats con clientes/proveedores.</li>
+            <li>Cadenas, política, religión o temas personales.</li>
+            <li>Audios largos sin previo aviso.</li>
+            <li>Tutearse desde el primer mensaje con clientes nuevos.</li>
+            <li>Mensajes fuera de horario salvo emergencia real.</li>
+            <li>Reenviar información confidencial sin autorización.</li>
+          </ul>
+        </div>
+      </div>
+
+      <h3 style="margin:36px 0 12px;font-weight:600;color:var(--navy);font-size:18px">Malas palabras y vocabulario</h3>
+      <div class="cards">
+        <div class="card">
+          <div class="card-icon">!</div>
+          <h3>Regla cero</h3>
+          <p contenteditable="true">No se utilizan groserías, palabras altisonantes, apodos ni expresiones vulgares en ningún canal interno o externo, incluyendo grupos de WhatsApp del equipo.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">A</div>
+          <h3>Trato siempre formal</h3>
+          <p contenteditable="true">"Buenos días", "por favor", "muchas gracias", "con todo gusto". Reemplazar "ok" por "de acuerdo" con clientes.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">✓</div>
+          <h3>Si hay frustración</h3>
+          <p contenteditable="true">Respira, redacta, espera 5 minutos y revisa antes de enviar. Lleva el tema a una llamada o reunión.</p>
+        </div>
+      </div>
+
+      <h3 style="margin:36px 0 12px;font-weight:600;color:var(--navy);font-size:18px">Temas de conversación</h3>
+      <div class="dos-donts">
+        <div class="do-box">
+          <h4>✓ Conversaciones apropiadas</h4>
+          <ul>
+            <li>Proyectos IMPULSA, mercado inmobiliario, tendencias del sector.</li>
+            <li>Logros de equipo, capacitaciones, oportunidades de desarrollo.</li>
+            <li>Cultura general, viajes, gastronomía, deportes (con respeto).</li>
+            <li>Reconocimientos a clientes, inversionistas y proveedores.</li>
+          </ul>
+        </div>
+        <div class="dont-box">
+          <h4>✗ Temas a evitar</h4>
+          <ul>
+            <li>Política, religión, ideologías polarizantes.</li>
+            <li>Chismes internos, quejas sobre clientes o compañeros.</li>
+            <li>Vida íntima propia o de terceros.</li>
+            <li>Información financiera o estratégica frente a personas no autorizadas.</li>
+            <li>Comparaciones negativas con la competencia.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== EVENTOS ===== -->
+    <section id="eventos">
+      <div class="sec-eyebrow">07 · Etiqueta y protocolo</div>
+      <h2 class="sec-title">Eventos <strong>internos</strong> y <strong>externos</strong></h2>
+      <p class="sec-intro">El comportamiento en eventos representa a IMPULSA. Cada colaborador es un embajador de la marca, dentro y fuera de la oficina.</p>
+
+      <div class="accordion">
+
+        <div class="acc-item">
+          <button class="acc-header" onclick="this.parentElement.classList.toggle('open')">
+            <span>Convivios y celebraciones internas</span><span class="acc-icon">+</span>
+          </button>
+          <div class="acc-body">
+            <ul>
+              <li>Llegar puntual, dress code indicado en la invitación.</li>
+              <li>Saludar a colegas y a los anfitriones; presentarse a quienes no conoces.</li>
+              <li>Consumo de alcohol moderado: máximo dos copas; mantener compostura.</li>
+              <li>Evitar conversaciones de trabajo intensas; el evento es para fortalecer relaciones.</li>
+              <li>No publicar fotos en redes sin autorización de los compañeros.</li>
+              <li>Despedirse de anfitriones y agradecer.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="acc-item">
+          <button class="acc-header" onclick="this.parentElement.classList.toggle('open')">
+            <span>Reuniones gerenciales</span><span class="acc-icon">+</span>
+          </button>
+          <div class="acc-body">
+            <ul>
+              <li>Llegar 5 minutos antes; tener listos documentos y dispositivo cargado.</li>
+              <li>Vestimenta business formal o business casual elevado.</li>
+              <li>Silenciar el teléfono. No revisarlo durante la reunión.</li>
+              <li>Tomar notas, escuchar activamente, intervenir con datos concretos.</li>
+              <li>Respetar el tiempo asignado a cada tema.</li>
+              <li>Cierre: acuerdos, responsables y fechas claras (minuta).</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="acc-item">
+          <button class="acc-header" onclick="this.parentElement.classList.toggle('open')">
+            <span>Capacitaciones</span><span class="acc-icon">+</span>
+          </button>
+          <div class="acc-body">
+            <ul>
+              <li>Confirmar asistencia previamente; cancelar con 24h de anticipación si no podrás asistir.</li>
+              <li>Llegar a tiempo, participar activamente, hacer preguntas.</li>
+              <li>Evitar revisar correos o teléfono salvo emergencia.</li>
+              <li>Agradecer al instructor y compartir aprendizajes con el equipo.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="acc-item">
+          <button class="acc-header" onclick="this.parentElement.classList.toggle('open')">
+            <span>Lanzamientos de proyectos</span><span class="acc-icon">+</span>
+          </button>
+          <div class="acc-body">
+            <ul>
+              <li>Dress code: business formal o cocktail según invitación.</li>
+              <li>Pin IMPULSA y/o gafete visible durante todo el evento.</li>
+              <li>Conocer al detalle el proyecto: ubicación, m², amenidades, plazos, inversión.</li>
+              <li>Rotar entre invitados, presentarse, abrir conversación, conectar con asesores.</li>
+              <li>Servicio de alimentos: comer con discreción, evitar platos cargados frente al cliente.</li>
+              <li>No tomar más de una copa antes de presentar.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="acc-item">
+          <button class="acc-header" onclick="this.parentElement.classList.toggle('open')">
+            <span>Reuniones con inversionistas</span><span class="acc-icon">+</span>
+          </button>
+          <div class="acc-body">
+            <ul>
+              <li>Dress code: business formal. Hombres saco y corbata; mujeres traje sastre o vestido formal.</li>
+              <li>Llegar 10-15 minutos antes; recibir al inversionista en recepción.</li>
+              <li>Confirmar agenda previa, materiales impresos y digitales listos.</li>
+              <li>Confidencialidad absoluta sobre cifras, retornos y partnerships.</li>
+              <li>Cierre con resumen escrito de acuerdos enviado el mismo día.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="acc-item">
+          <button class="acc-header" onclick="this.parentElement.classList.toggle('open')">
+            <span>Reuniones con clientes, contratistas y proveedores</span><span class="acc-icon">+</span>
+          </button>
+          <div class="acc-body">
+            <ul>
+              <li>Trato cordial pero firme; el cliente nunca debe sentir improvisación.</li>
+              <li>Recibir personalmente: recepción → ofrecer agua/café → sala asignada.</li>
+              <li>Reuniones con contratistas/proveedores: claridad en alcances, tiempos, pagos y calidad esperada.</li>
+              <li>Respetar la agenda; no extender más allá del tiempo acordado.</li>
+              <li>Despedida cordial, acompañar hasta la puerta o ascensor.</li>
+              <li>Seguimiento por correo con minuta dentro de las 24 horas.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== ATENCIÓN CLIENTES ===== -->
+    <section id="clientes">
+      <div class="sec-eyebrow">08 · Servicio</div>
+      <h2 class="sec-title">Atención a <strong>clientes</strong></h2>
+      <p class="sec-intro">El cliente IMPULSA invierte su patrimonio en proyectos icónicos. Merece una atención impecable, ágil y empática en cada punto de contacto.</p>
+
+      <div class="cards">
+        <div class="card">
+          <div class="card-icon">1</div>
+          <span class="role-tag">Primer contacto</span>
+          <h3>Bienvenida</h3>
+          <p>Saluda con sonrisa, contacto visual, llamar al cliente por su nombre. "Bienvenido/a a IMPULSA, ¿en qué puedo ayudarle?".</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">2</div>
+          <span class="role-tag">Escucha</span>
+          <h3>Diagnóstico</h3>
+          <p>Identifica necesidad: presupuesto, ubicación, tipología, plazos. No interrumpir, tomar notas.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">3</div>
+          <span class="role-tag">Asesoría</span>
+          <h3>Propuesta</h3>
+          <p>Ofrecer la mejor opción del portafolio. Honestidad sobre tiempos, costos y características.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">4</div>
+          <span class="role-tag">Seguimiento</span>
+          <h3>Acompañamiento</h3>
+          <p>Confirmar siguiente paso en máximo 24 horas. Mantener al cliente informado sin saturarlo.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">5</div>
+          <span class="role-tag">Postventa</span>
+          <h3>Lealtad</h3>
+          <p>Fechas especiales, entrega impecable, atención de garantía, encuesta de satisfacción.</p>
+        </div>
+        <div class="card" style="border-top-color:var(--navy)">
+          <div class="card-icon" style="background:var(--navy);color:var(--dorado)">!</div>
+          <span class="role-tag">Quejas</span>
+          <h3>Manejo de reclamos</h3>
+          <p>Escuchar sin interrumpir, validar la emoción, ofrecer solución y plazo, escalar si es necesario. Nunca discutir.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== ALIMENTOS ===== -->
+    <section id="alimentos">
+      <div class="sec-eyebrow">09 · Protocolo</div>
+      <h2 class="sec-title">Servicio de <strong>alimentos</strong></h2>
+      <p class="sec-intro">En reuniones gerenciales, con inversionistas o clientes, el servicio de alimentos refuerza la imagen de excelencia de IMPULSA. Siempre con la vajilla y cubiertos corporativos designados.</p>
+
+      <div class="cards">
+        <div class="card">
+          <div class="card-icon">◈</div>
+          <h3>Vajilla designada</h3>
+          <ul>
+            <li>Platos en color blanco o crema con detalle dorado.</li>
+            <li>Tazas y juego de café corporativo IMPULSA.</li>
+            <li>Servilletas de tela blancas o negras dobladas.</li>
+            <li>Centro de mesa minimalista (vela LED o flores frescas bajas).</li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="card-icon">⚒</div>
+          <h3>Cubiertos y cristalería</h3>
+          <ul>
+            <li>Cubiertos de acero inoxidable pulido designados.</li>
+            <li>Copa de agua y copa de vino tinto/blanco según el evento.</li>
+            <li>Sin platos desechables ni vasos de plástico en reuniones ejecutivas.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="card-icon">☕</div>
+          <h3>Estaciones de café</h3>
+          <ul>
+            <li>Termo corporativo, sobres de azúcar, edulcorante y crema.</li>
+            <li>Selección de tés, agua mineral y natural en jarra.</li>
+            <li>Galleta o snack ligero discreto.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="card-icon">⊛</div>
+          <h3>Menú según evento</h3>
+          <ul>
+            <li><strong>Desayuno gerencial:</strong> fruta, pan artesanal, café, jugo.</li>
+            <li><strong>Coffee break:</strong> mini sándwiches, repostería, infusiones.</li>
+            <li><strong>Almuerzo ejecutivo:</strong> entrada + plato fuerte + postre.</li>
+            <li><strong>Cocktail inversionistas:</strong> bocadillos fríos y calientes + bebidas premium.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="card-icon">✦</div>
+          <h3>Etiqueta a la mesa</h3>
+          <ul>
+            <li>El anfitrión indica cuándo iniciar.</li>
+            <li>Mover los cubiertos de fuera hacia adentro según el platillo.</li>
+            <li>Servilleta sobre las piernas; al retirarse, doblada a la izquierda del plato.</li>
+            <li>Celular boca abajo o guardado. No grabar audios en la mesa.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== VISITAS ===== -->
+    <section id="visitas">
+      <div class="sec-eyebrow">10 · Hospitalidad</div>
+      <h2 class="sec-title">Atención a <strong>visitas</strong></h2>
+      <p class="sec-intro">Cada visita merece una experiencia coherente con la marca IMPULSA. Este es el protocolo básico para reuniones ejecutivas y con clientes.</p>
+
+      <div class="protocol-steps">
+        <div class="protocol-step">
+          <h5>Antes de la llegada</h5>
+          <p>Confirmar agenda y asistentes 24h antes. Sala reservada, climatización, materiales y refrigerios listos.</p>
+        </div>
+        <div class="protocol-step">
+          <h5>Llegada a recepción</h5>
+          <p>Recepción saluda de pie, sonríe, llama al colaborador anfitrión, ofrece agua/café y orienta a la sala o área de espera.</p>
+        </div>
+        <div class="protocol-step">
+          <h5>Recibimiento del anfitrión</h5>
+          <p>Bajar a recibir personalmente. Saludar por nombre, dar la mano firme, conducir a la sala. Presentar al equipo.</p>
+        </div>
+        <div class="protocol-step">
+          <h5>Durante la reunión</h5>
+          <p>Ofrecer bebida nuevamente, asegurar que tengan lo necesario (cargador, papel, lápiz). Cerrar puerta para privacidad.</p>
+        </div>
+        <div class="protocol-step">
+          <h5>Servicio de alimentos (si aplica)</h5>
+          <p>Servir según protocolo de la sección anterior, con vajilla designada y discreción.</p>
+        </div>
+        <div class="protocol-step">
+          <h5>Cierre y despedida</h5>
+          <p>Resumir acuerdos, agradecer la visita, acompañar hasta el ascensor o puerta principal. Recepción se despide nuevamente.</p>
+        </div>
+        <div class="protocol-step">
+          <h5>Post visita</h5>
+          <p>Enviar correo de agradecimiento con minuta y próximos pasos dentro de las 24 horas siguientes.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== SALUDO ===== -->
+    <section id="saludo">
+      <div class="sec-eyebrow">11 · Relacionamiento</div>
+      <h2 class="sec-title">El <strong>saludo</strong> IMPULSA</h2>
+      <p class="sec-intro">El saludo es nuestro primer mensaje. En el giro inmobiliario, donde construimos confianza patrimonial, el saludo debe ser firme, cálido y profesional.</p>
+
+      <div class="cards">
+        <div class="card">
+          <div class="card-icon">⬢</div>
+          <span class="role-tag">Internos</span>
+          <h3>Compañeros y colaboradores</h3>
+          <ul>
+            <li>"Buenos días / Buenas tardes" al ingresar a la oficina.</li>
+            <li>Sonrisa, contacto visual y nombre del compañero.</li>
+            <li>Saludo de mano o cordial inclinación, especialmente con áreas con las que no se interactúa diario.</li>
+            <li>Saludar a recepción, mensajería y mantenimiento con la misma calidez.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="card-icon">⬡</div>
+          <span class="role-tag">Clientes / Inversionistas</span>
+          <h3>Trato a clientes e inversionistas</h3>
+          <ul>
+            <li>Saludo formal: "Buenos días, Sr./Sra. [Apellido]. Gracias por su visita".</li>
+            <li>Apretón de mano firme (3 segundos), seguro y con contacto visual.</li>
+            <li>De pie al recibirlos y al despedirlos.</li>
+            <li>Tutear solo cuando el cliente lo proponga.</li>
+            <li>Entregar tarjeta QR si es primer encuentro.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="card-icon">⬣</div>
+          <span class="role-tag">Proveedores / Contratistas</span>
+          <h3>Proveedores y contratistas</h3>
+          <ul>
+            <li>Saludo cordial y respetuoso; tratarlos como aliados estratégicos.</li>
+            <li>"Buenos días, [Nombre], gracias por venir a IMPULSA".</li>
+            <li>Recibir en sala asignada, no en pasillos.</li>
+            <li>Acompañar a la salida tras la reunión.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== TRATO A LAS PERSONAS ===== -->
+    <section id="trato">
+      <div class="sec-eyebrow">12 · Cultura DECIDE</div>
+      <h2 class="sec-title">Trato a las <strong>personas</strong></h2>
+      <p class="sec-intro">Los valores DECIDE se viven en cada interacción. Así llevamos la cultura IMPULSA a la práctica:</p>
+
+      <div class="accordion">
+        <div class="acc-item">
+          <button class="acc-header" onclick="this.parentElement.classList.toggle('open')">
+            <span><strong style="color:var(--dorado-oscuro)">D</strong> · Determinación en el trato</span><span class="acc-icon">+</span>
+          </button>
+          <div class="acc-body">
+            <p contenteditable="true">Cumplimos lo que prometemos, damos seguimiento puntual y cerramos cada conversación con un compromiso claro. No dejamos solicitudes sin respuesta.</p>
+          </div>
+        </div>
+        <div class="acc-item">
+          <button class="acc-header" onclick="this.parentElement.classList.toggle('open')">
+            <span><strong style="color:var(--dorado-oscuro)">E</strong> · Excelencia en el trato</span><span class="acc-icon">+</span>
+          </button>
+          <div class="acc-body">
+            <p contenteditable="true">Cuidamos los detalles: tono, ortografía, puntualidad, presentación. Cada correo, llamada o entrega refleja altos estándares.</p>
+          </div>
+        </div>
+        <div class="acc-item">
+          <button class="acc-header" onclick="this.parentElement.classList.toggle('open')">
+            <span><strong style="color:var(--dorado-oscuro)">C</strong> · Compromiso en el trato</span><span class="acc-icon">+</span>
+          </button>
+          <div class="acc-body">
+            <p contenteditable="true">Estamos disponibles, somos confiables y nos hacemos cargo. Si un colega o cliente requiere apoyo, lo acompañamos hasta resolver.</p>
+          </div>
+        </div>
+        <div class="acc-item">
+          <button class="acc-header" onclick="this.parentElement.classList.toggle('open')">
+            <span><strong style="color:var(--dorado-oscuro)">I</strong> · Integridad en el trato</span><span class="acc-icon">+</span>
+          </button>
+          <div class="acc-body">
+            <p contenteditable="true">Hablamos con honestidad, mantenemos la confidencialidad, no comentamos información sensible y tratamos a todos con respeto, sin importar jerarquía.</p>
+          </div>
+        </div>
+        <div class="acc-item">
+          <button class="acc-header" onclick="this.parentElement.classList.toggle('open')">
+            <span><strong style="color:var(--dorado-oscuro)">D</strong> · Dinamismo en el trato</span><span class="acc-icon">+</span>
+          </button>
+          <div class="acc-body">
+            <p contenteditable="true">Respondemos con agilidad, nos adaptamos a estilos y necesidades de cada cliente, proponemos soluciones en lugar de esperar instrucciones.</p>
+          </div>
+        </div>
+        <div class="acc-item">
+          <button class="acc-header" onclick="this.parentElement.classList.toggle('open')">
+            <span><strong style="color:var(--dorado-oscuro)">E</strong> · Empatía en el trato</span><span class="acc-icon">+</span>
+          </button>
+          <div class="acc-body">
+            <p contenteditable="true">Escuchamos para comprender, no para responder. Validamos emociones, reconocemos esfuerzos, celebramos logros y acompañamos en momentos difíciles.</p>
+          </div>
+        </div>
+      </div>
+
+      <h3 style="margin:30px 0 12px;font-weight:600;color:var(--navy);font-size:18px">Reglas universales del trato IMPULSA</h3>
+      <div class="dos-donts">
+        <div class="do-box">
+          <h4>✓ Siempre</h4>
+          <ul>
+            <li>Llamar a las personas por su nombre.</li>
+            <li>Sonreír, mantener contacto visual y postura abierta.</li>
+            <li>Decir "por favor", "gracias", "con gusto".</li>
+            <li>Reconocer y celebrar el trabajo del equipo.</li>
+            <li>Cuidar el tono en momentos de presión.</li>
+          </ul>
+        </div>
+        <div class="dont-box">
+          <h4>✗ Nunca</h4>
+          <ul>
+            <li>Levantar la voz o discutir frente a clientes/visitas.</li>
+            <li>Hacer comentarios discriminatorios o burlones.</li>
+            <li>Hablar mal de compañeros, clientes o de la competencia.</li>
+            <li>Ignorar o "dejar en visto" sin razón.</li>
+            <li>Asumir confianza sin que haya sido construida.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== USO DE LA MARCA ===== -->
+    <section id="uso-marca">
+      <div class="sec-eyebrow">13 · Marca</div>
+      <h2 class="sec-title">Correcto uso de la <strong>marca</strong></h2>
+      <p class="sec-intro">El logo, los colores y la tipografía son los activos visuales de IMPULSA. Su uso correcto protege la identidad construida en más de 10 años.</p>
+
+      <h3 style="margin:20px 0 10px;font-weight:600;color:var(--navy);font-size:18px">Paleta de color oficial IMPULSA</h3>
+      <p class="sec-intro" style="margin-bottom:18px">Estos son los únicos colores autorizados para piezas institucionales. El dorado es el color insignia, el negro y el navy son los principales soportes y el blanco aporta espacio y elegancia editorial.</p>
+      <div class="brand-block">
+        <div class="color-swatch">
+          <div class="chip" style="background:#262929"></div>
+          <div class="meta">
+            <h5>Negro IMPULSA</h5>
+            <div class="code">HEX #262929<br/>RGB 38, 41, 41<br/>CMYK 70, 60, 60, 70<br/>Pantone Black 6 C</div>
+          </div>
+        </div>
+        <div class="color-swatch">
+          <div class="chip" style="background:#BA8747"></div>
+          <div class="meta">
+            <h5>Dorado IMPULSA <span style="font-size:9px;background:var(--negro);color:var(--dorado);padding:2px 7px;border-radius:10px;letter-spacing:.15em;margin-left:6px;vertical-align:middle">PRIMARIO</span></h5>
+            <div class="code">HEX #BA8747<br/>RGB 186, 135, 71<br/>CMYK 24, 47, 81, 9<br/>Pantone 7563 C</div>
+          </div>
+        </div>
+        <div class="color-swatch">
+          <div class="chip" style="background:#214A59"></div>
+          <div class="meta">
+            <h5>Navy IMPULSA <span style="font-size:9px;background:var(--navy);color:var(--dorado);padding:2px 7px;border-radius:10px;letter-spacing:.15em;margin-left:6px;vertical-align:middle">PRIMARIO</span></h5>
+            <div class="code">HEX #214A59<br/>RGB 33, 74, 89<br/>CMYK 84, 53, 41, 38<br/>Pantone 5473 C</div>
+          </div>
+        </div>
+        <div class="color-swatch">
+          <div class="chip" style="background:#FFFFFF;border-bottom:1px solid var(--crema-medio)"></div>
+          <div class="meta">
+            <h5>Blanco IMPULSA</h5>
+            <div class="code">HEX #FFFFFF<br/>RGB 255, 255, 255<br/>CMYK 0, 0, 0, 0<br/>Pantone White</div>
+          </div>
+        </div>
+      </div>
+
+      <h3 style="margin:30px 0 10px;font-weight:600;color:var(--navy);font-size:18px">Uso proporcional de la paleta</h3>
+      <div style="display:grid;grid-template-columns:45% 25% 25% 5%;height:50px;border-radius:6px;overflow:hidden;box-shadow:var(--sombra);margin-top:14px">
+        <div style="background:var(--negro);display:flex;align-items:center;justify-content:center;color:var(--dorado);font-size:11px;letter-spacing:.2em">NEGRO 45%</div>
+        <div style="background:var(--navy);display:flex;align-items:center;justify-content:center;color:var(--dorado);font-size:11px;letter-spacing:.2em">NAVY 25%</div>
+        <div style="background:var(--dorado);display:flex;align-items:center;justify-content:center;color:var(--negro);font-size:11px;letter-spacing:.2em">DORADO 25%</div>
+        <div style="background:var(--blanco);display:flex;align-items:center;justify-content:center;color:var(--negro);font-size:9px;letter-spacing:.1em;border:1px solid var(--crema-medio)">5%</div>
+      </div>
+      <p style="font-size:12px;color:var(--texto-suave);margin-top:8px"><em>Negro y navy son los pilares cromáticos; el dorado se reserva para acentos premium e identidad del símbolo; el blanco aporta espacio editorial.</em></p>
+
+      <h3 style="margin:30px 0 10px;font-weight:600;color:var(--navy);font-size:18px">Usos del logotipo</h3>
+      <div class="logo-usage">
+        <div class="logo-cell dark good">
+          <svg viewBox="0 0 220 60" xmlns="http://www.w3.org/2000/svg">
+            <polygon points="105,8 125,25 125,30 105,14 85,30 85,25" fill="#BA8747"/>
+            <polygon points="105,20 125,37 125,42 105,26 85,42 85,37" fill="#BA8747"/>
+            <text x="60" y="58" font-family="Helvetica" font-size="16" letter-spacing="4" fill="#214A59">IMPULSA</text>
+          </svg>
+          <span class="caption">Símbolo dorado · wordmark navy sobre negro</span>
+        </div>
+        <div class="logo-cell light good">
+          <svg viewBox="0 0 220 60" xmlns="http://www.w3.org/2000/svg">
+            <polygon points="105,8 125,25 125,30 105,14 85,30 85,25" fill="#BA8747"/>
+            <polygon points="105,20 125,37 125,42 105,26 85,42 85,37" fill="#BA8747"/>
+            <text x="60" y="58" font-family="Helvetica" font-size="16" letter-spacing="4" fill="#214A59">IMPULSA</text>
+          </svg>
+          <span class="caption">Versión sobre fondo claro</span>
+        </div>
+        <div class="logo-cell bad" style="background:#BA8747;color:#fff">
+          <svg viewBox="0 0 220 60" xmlns="http://www.w3.org/2000/svg">
+            <polygon points="105,8 125,25 125,30 105,14 85,30 85,25" fill="#fff"/>
+            <polygon points="105,20 125,37 125,42 105,26 85,42 85,37" fill="#fff"/>
+            <text x="60" y="58" font-family="Helvetica" font-size="16" letter-spacing="4" fill="#fff">IMPULSA</text>
+          </svg>
+          <span class="caption">Sobre dorado sin contraste suficiente</span>
+        </div>
+        <div class="logo-cell bad" style="background:repeating-linear-gradient(45deg,#BA8747,#BA8747 10px,#8E6432 10px,#8E6432 20px)">
+          <svg viewBox="0 0 220 60" xmlns="http://www.w3.org/2000/svg">
+            <polygon points="105,8 125,25 125,30 105,14 85,30 85,25" fill="#BA8747"/>
+            <polygon points="105,20 125,37 125,42 105,26 85,42 85,37" fill="#BA8747"/>
+            <text x="60" y="58" font-family="Comic Sans MS" font-size="16" letter-spacing="0" fill="#fff">Impulsa</text>
+          </svg>
+          <span class="caption">Tipografía o fondos no permitidos</span>
+        </div>
+      </div>
+
+      <h3 style="margin:30px 0 10px;font-weight:600;color:var(--navy);font-size:18px">Reglas de oro del logo</h3>
+      <div class="dos-donts">
+        <div class="do-box">
+          <h4>✓ Permitido</h4>
+          <ul>
+            <li>Mantener área de respeto: mínimo el alto del símbolo en cada lado.</li>
+            <li>Usar versiones oficiales: dorado sobre negro o sobre fondo claro.</li>
+            <li>Conservar proporciones del logotipo.</li>
+            <li>Usar la tipografía oficial en piezas (Helvetica / sans serif geométrica).</li>
+          </ul>
+        </div>
+        <div class="dont-box">
+          <h4>✗ No permitido</h4>
+          <ul>
+            <li>Deformar, rotar o aplicar efectos al logo.</li>
+            <li>Cambiar los colores oficiales.</li>
+            <li>Aplicarlo sobre fondos con bajo contraste o imágenes saturadas.</li>
+            <li>Sustituir la tipografía por fuentes decorativas.</li>
+            <li>Combinarlo con otros logos sin lineamiento aprobado.</li>
+          </ul>
+        </div>
+      </div>
+
+      <h3 style="margin:30px 0 10px;font-weight:600;color:var(--navy);font-size:18px">Tipografía</h3>
+      <div class="cards">
+        <div class="card">
+          <h3 style="font-weight:300;letter-spacing:.15em">IMPULSA</h3>
+          <p><strong>Sans serif geométrica</strong> (Helvetica / Montserrat / Avenir según pieza). Para títulos, peso 300 con tracking amplio.</p>
+        </div>
+        <div class="card">
+          <h3 style="font-weight:600">Cuerpo profesional</h3>
+          <p>Cuerpo de texto en peso regular o medium. Interlineado generoso (1.5-1.6) para mantener la elegancia editorial.</p>
+        </div>
+        <div class="card">
+          <h3 style="font-family:serif">Acentos editoriales</h3>
+          <p>Uso de serif clásica permitido en piezas editoriales especiales (informe anual, dossiers de inversionistas).</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== CIERRE ===== -->
+    <section style="border-bottom:none">
+      <div class="hero" style="margin-top:0">
+        <div class="hero-eyebrow">Una promesa, un equipo</div>
+        <h1>Somos <strong>IMPULSA</strong>.<br/>Y nuestra imagen lo dice todo.</h1>
+        <p contenteditable="true">Este manual es una guía viva. Si tienes propuestas, sugerencias o dudas sobre cómo aplicar algún protocolo, acércate a Recursos Humanos o al área de Comunicación Corporativa.</p>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<!-- ============= FOOTER ============= -->
+<footer>
+  <div class="ft-grid">
+    <div>
+      <h6>IMPULSA</h6>
+      <p contenteditable="true">12 calle 2-25, zona 10<br/>Edificio Avia Torre II, Oficina 1601<br/>Ciudad de Guatemala</p>
+    </div>
+    <div>
+      <h6>Contacto</h6>
+      <p contenteditable="true">+502 2444-0303<br/>info@impulsa.gt<br/>www.impulsa.gt</p>
+    </div>
+    <div>
+      <h6>Unidades de negocio</h6>
+      <p>Desarrollo · Comercialización · Project Management</p>
+    </div>
+    <div>
+      <h6>Documento</h6>
+      <p contenteditable="true">Manual de Imagen Corporativa v1.0<br/>Mayo 2026 · Documento interno</p>
+    </div>
+  </div>
+  <div class="ft-bottom">© IMPULSA · Todos los derechos reservados · Confidencial / Uso interno</div>
+</footer>
+
+<script>
+  // -------- Modo edición --------
+  function toggleEdit(){
+    document.body.classList.toggle('edit-mode');
+    const editables = document.querySelectorAll('[contenteditable]');
+    const isEdit = document.body.classList.contains('edit-mode');
+    editables.forEach(el => el.setAttribute('contenteditable', isEdit ? 'true' : 'false'));
+    document.getElementById('editToggle').textContent = isEdit ? '✓ Guardar' : '✎ Editar';
+  }
+  // Inicialmente todos los contenteditable están "false" hasta activar modo edición
+  document.querySelectorAll('[contenteditable]').forEach(el => el.setAttribute('contenteditable','false'));
+
+  // -------- Tabs --------
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const target = btn.dataset.tab;
+      const parent = btn.closest('.tabs');
+      parent.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      parent.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+      btn.classList.add('active');
+      parent.querySelector('#' + target).classList.add('active');
+    });
+  });
+
+  // -------- Scroll spy en sidebar --------
+  const sections = document.querySelectorAll('section[id], .hero[id]');
+  const navLinks = document.querySelectorAll('.nav-link');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => {
+      const top = s.offsetTop - 100;
+      if(window.scrollY >= top) current = s.id;
+    });
+    navLinks.forEach(l => {
+      l.classList.remove('active');
+      if(l.getAttribute('href') === '#' + current) l.classList.add('active');
+    });
+  });
+
+  // -------- Cerrar sidebar al hacer click en link (móvil) --------
+  navLinks.forEach(l => l.addEventListener('click', () => {
+    if(window.innerWidth < 980) document.querySelector('.sidebar').classList.remove('open');
+  }));
+</script>
+</body>
+</html>
