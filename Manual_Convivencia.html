@@ -1,0 +1,1297 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Manual de Convivencia — Impulsa 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.31.0/dist/tabler-icons.min.css">
+<style>
+  :root {
+    --gold: #BA8747;
+    --gold-light: #d4a76a;
+    --gold-pale: rgba(186,135,71,0.12);
+    --teal: #214A59;
+    --teal-mid: #2d6478;
+    --teal-pale: rgba(33,74,89,0.07);
+    --cream: #EDE5D6;
+    --cream-soft: #f7f3ee;
+    --dark: #262929;
+    --mid: #555;
+    --border: rgba(186,135,71,0.22);
+    --border-teal: rgba(33,74,89,0.15);
+    --radius: 8px;
+    --radius-lg: 14px;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream-soft);
+    color: var(--dark);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ── SIDEBAR ── */
+  .sidebar {
+    position: fixed;
+    top: 0; left: 0;
+    width: 260px; height: 100vh;
+    background: var(--teal);
+    display: flex; flex-direction: column;
+    z-index: 200;
+    transition: transform 0.3s ease;
+  }
+
+  .sidebar-logo {
+    padding: 2rem 1.75rem 1.5rem;
+    border-bottom: 1px solid rgba(186,135,71,0.2);
+  }
+  .sidebar-logo-row {
+    display: flex; align-items: center; gap: 10px;
+    margin-bottom: 0.75rem;
+  }
+  .logo-wordmark {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 17px; font-weight: 300;
+    letter-spacing: 6px; color: var(--cream);
+    text-transform: uppercase;
+  }
+  .sidebar-tagline {
+    font-size: 10px; letter-spacing: 2px;
+    color: rgba(237,229,214,0.45);
+    text-transform: uppercase;
+    display: block; margin-top: 4px;
+  }
+
+  .sidebar-nav {
+    flex: 1; overflow-y: auto; padding: 1.25rem 0;
+  }
+  .nav-section-label {
+    font-size: 9px; letter-spacing: 2.5px;
+    color: rgba(237,229,214,0.3);
+    text-transform: uppercase;
+    padding: 0.75rem 1.75rem 0.4rem;
+    display: block;
+  }
+  .nav-item {
+    display: flex; align-items: center; gap: 10px;
+    padding: 11px 1.75rem;
+    color: rgba(237,229,214,0.6);
+    font-size: 13px; font-weight: 400;
+    cursor: pointer;
+    border-left: 2px solid transparent;
+    transition: all 0.2s;
+    text-decoration: none;
+    position: relative;
+  }
+  .nav-item i { font-size: 16px; flex-shrink: 0; }
+  .nav-item:hover { color: var(--cream); background: rgba(255,255,255,0.04); }
+  .nav-item.active {
+    color: var(--gold);
+    border-left-color: var(--gold);
+    background: rgba(186,135,71,0.08);
+  }
+  .nav-badge {
+    background: var(--gold);
+    color: white;
+    font-size: 8px; font-weight: 500;
+    letter-spacing: 0.5px;
+    padding: 2px 7px; border-radius: 20px;
+    text-transform: uppercase;
+    margin-left: auto;
+  }
+
+  .sidebar-footer {
+    padding: 1.25rem 1.75rem;
+    border-top: 1px solid rgba(186,135,71,0.15);
+    font-size: 10px; color: rgba(237,229,214,0.3);
+    letter-spacing: 0.5px;
+  }
+
+  /* ── MAIN CONTENT ── */
+  .main {
+    margin-left: 260px;
+    min-height: 100vh;
+  }
+
+  /* ── TOPBAR ── */
+  .topbar {
+    background: white;
+    border-bottom: 1px solid var(--border);
+    padding: 0 2.5rem;
+    height: 60px;
+    display: flex; align-items: center; justify-content: space-between;
+    position: sticky; top: 0; z-index: 100;
+  }
+  .topbar-breadcrumb {
+    font-size: 12px; color: #aaa; letter-spacing: 0.5px;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .topbar-breadcrumb span { color: var(--teal); font-weight: 500; }
+  .topbar-actions { display: flex; align-items: center; gap: 12px; }
+  .topbar-btn {
+    background: none; border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 7px 14px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px; color: var(--teal);
+    cursor: pointer; display: flex; align-items: center; gap: 6px;
+    transition: all 0.2s;
+  }
+  .topbar-btn:hover { background: var(--teal-pale); border-color: var(--teal); }
+  .topbar-btn.primary {
+    background: var(--teal); color: var(--cream); border-color: var(--teal);
+  }
+  .topbar-btn.primary:hover { background: var(--teal-mid); }
+  .menu-toggle {
+    display: none;
+    background: none; border: none; cursor: pointer;
+    color: var(--teal); font-size: 22px;
+    padding: 4px;
+  }
+
+  /* ── SECTIONS ── */
+  .section {
+    display: none;
+    padding: 2.5rem;
+    animation: fadeUp 0.35s ease;
+  }
+  .section.active { display: block; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: none; }
+  }
+
+  /* ── COVER / HERO ── */
+  .cover-hero {
+    background: var(--teal);
+    border-radius: var(--radius-lg);
+    padding: 3rem;
+    margin-bottom: 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .cover-hero::before {
+    content: '';
+    position: absolute;
+    right: -60px; bottom: -60px;
+    width: 260px; height: 260px;
+    border: 50px solid rgba(186,135,71,0.1);
+    border-radius: 50%;
+  }
+  .cover-hero::after {
+    content: '';
+    position: absolute;
+    right: 60px; top: -40px;
+    width: 140px; height: 140px;
+    border: 30px solid rgba(186,135,71,0.07);
+    border-radius: 50%;
+  }
+  .cover-eyebrow {
+    font-size: 10px; letter-spacing: 4px;
+    color: var(--gold-light); text-transform: uppercase;
+    margin-bottom: 1rem; display: block;
+  }
+  .cover-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 54px; font-weight: 400;
+    color: var(--cream); line-height: 1.0;
+    margin-bottom: 0.5rem;
+  }
+  .cover-subtitle {
+    font-size: 14px; color: rgba(237,229,214,0.55);
+    letter-spacing: 1px; margin-bottom: 2rem;
+  }
+  .cover-desc {
+    font-size: 14px; color: rgba(237,229,214,0.75);
+    line-height: 1.8; max-width: 500px; margin-bottom: 2rem;
+  }
+  .cover-pills {
+    display: flex; gap: 10px; flex-wrap: wrap;
+  }
+  .cover-pill {
+    background: rgba(186,135,71,0.15);
+    border: 1px solid rgba(186,135,71,0.35);
+    color: var(--gold-light);
+    font-size: 11px; letter-spacing: 1px;
+    padding: 6px 14px; border-radius: 20px;
+  }
+
+  /* ── STAT GRID ── */
+  .stat-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem; margin-bottom: 2rem;
+  }
+  .stat-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.25rem; text-align: center;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .stat-card:hover { border-color: var(--gold); transform: translateY(-2px); }
+  .stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 38px; font-weight: 400; color: var(--teal);
+    line-height: 1;
+  }
+  .stat-label { font-size: 11px; color: #999; letter-spacing: 0.5px; margin-top: 6px; }
+
+  /* ── SECTION HEADER ── */
+  .section-head {
+    margin-bottom: 2rem;
+    padding-bottom: 1.25rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .section-eyebrow {
+    font-size: 10px; letter-spacing: 3px;
+    color: var(--gold); text-transform: uppercase;
+    display: block; margin-bottom: 6px;
+  }
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 38px; font-weight: 400; color: var(--teal);
+    line-height: 1.1;
+  }
+  .section-intro {
+    font-size: 14px; color: var(--mid);
+    line-height: 1.8; max-width: 600px; margin-top: 0.75rem;
+  }
+
+  /* ── CARDS ── */
+  .card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+    margin-bottom: 1.25rem;
+  }
+  .card-title {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 11px; letter-spacing: 2px;
+    color: var(--gold); text-transform: uppercase;
+    font-weight: 500; margin-bottom: 1.1rem;
+  }
+  .card-title i { font-size: 16px; }
+
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem; }
+
+  /* ── RULE LIST ── */
+  .rule-list { list-style: none; }
+  .rule-list li {
+    display: flex; gap: 10px; align-items: flex-start;
+    padding: 9px 0;
+    border-bottom: 1px solid rgba(186,135,71,0.08);
+    font-size: 13.5px; line-height: 1.65;
+  }
+  .rule-list li:last-child { border-bottom: none; }
+  .rule-list li::before {
+    content: '';
+    width: 5px; height: 5px; border-radius: 50%;
+    background: var(--gold); flex-shrink: 0; margin-top: 8px;
+  }
+
+  /* ── CALLOUTS ── */
+  .callout {
+    border-radius: var(--radius);
+    padding: 1.1rem 1.35rem;
+    margin: 1.25rem 0;
+    font-size: 13.5px; line-height: 1.7;
+  }
+  .callout.info {
+    background: var(--teal-pale);
+    border-left: 3px solid var(--teal);
+  }
+  .callout.warn {
+    background: rgba(186,135,71,0.08);
+    border-left: 3px solid var(--gold);
+  }
+  .callout.danger {
+    background: rgba(200,60,40,0.06);
+    border-left: 3px solid #c83c28;
+  }
+  .callout strong { color: var(--teal); }
+  .callout.warn strong { color: var(--gold); }
+  .callout.danger strong { color: #c83c28; }
+
+  /* ── CHECKLIST ── */
+  .checklist-item {
+    display: flex; align-items: center; gap: 12px;
+    padding: 11px 14px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    margin-bottom: 8px;
+    cursor: pointer;
+    transition: background 0.15s, border-color 0.15s;
+    font-size: 13.5px;
+    user-select: none;
+  }
+  .checklist-item:hover { background: rgba(186,135,71,0.04); border-color: var(--gold-light); }
+  .checklist-item.checked {
+    background: rgba(33,74,89,0.05);
+    border-color: rgba(33,74,89,0.2);
+  }
+  .checklist-item.checked .cl-label { text-decoration: line-through; color: #bbb; }
+  .cl-box {
+    width: 18px; height: 18px; border-radius: 4px;
+    border: 1.5px solid var(--gold);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; transition: all 0.15s;
+    color: white; font-size: 11px;
+  }
+  .checklist-item.checked .cl-box {
+    background: var(--teal); border-color: var(--teal);
+  }
+
+  /* ── CONTACTS ── */
+  .contact-row {
+    background: var(--teal);
+    border-radius: var(--radius-lg);
+    padding: 1.25rem 1.5rem;
+    display: flex; align-items: center; gap: 1rem;
+    margin-bottom: 10px;
+    transition: transform 0.2s;
+  }
+  .contact-row:hover { transform: translateX(4px); }
+  .c-avatar {
+    width: 46px; height: 46px; border-radius: 50%;
+    background: rgba(186,135,71,0.2);
+    border: 1.5px solid var(--gold);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px; color: var(--gold); flex-shrink: 0;
+  }
+  .c-info { flex: 1; }
+  .c-name { font-size: 14px; font-weight: 500; color: var(--cream); }
+  .c-role { font-size: 11px; color: rgba(237,229,214,0.5); margin-top: 1px; }
+  .c-email { font-size: 12px; color: var(--gold-light); margin-top: 3px; }
+  .c-tag {
+    background: rgba(186,135,71,0.15);
+    border: 1px solid rgba(186,135,71,0.3);
+    color: var(--gold-light);
+    font-size: 10px; letter-spacing: 1px;
+    padding: 4px 10px; border-radius: 12px;
+    text-transform: uppercase; flex-shrink: 0;
+  }
+
+  /* ── EMAIL CHIPS ── */
+  .email-chip {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.1rem; text-align: center;
+  }
+  .email-chip-title {
+    font-size: 10px; letter-spacing: 2px;
+    color: var(--gold); text-transform: uppercase;
+    font-weight: 500; margin-bottom: 8px;
+  }
+  .email-chip-addr {
+    font-size: 12px; color: var(--teal); line-height: 1.4;
+  }
+
+  /* ── ROOM PILLS ── */
+  .room-pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--teal); color: var(--cream);
+    font-size: 12px; padding: 7px 18px;
+    border-radius: 22px; margin: 4px;
+  }
+
+  /* ── FLOOR MAP ── */
+  .floor-wrap {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+  .floor-map { width: 100%; height: auto; display: block; }
+
+  /* ── PROGRESS BAR ── */
+  .progress-track {
+    background: rgba(186,135,71,0.12);
+    border-radius: 20px; height: 5px;
+    margin-top: 1rem; overflow: hidden;
+  }
+  .progress-fill {
+    background: var(--gold); height: 100%;
+    border-radius: 20px;
+    transition: width 0.4s ease;
+  }
+  .progress-label {
+    font-size: 11px; color: #aaa;
+    margin-top: 6px; text-align: right;
+  }
+
+  /* ── TIMELINE (emergency) ── */
+  .timeline { position: relative; padding-left: 2rem; }
+  .timeline::before {
+    content: '';
+    position: absolute; left: 7px; top: 8px; bottom: 8px;
+    width: 2px; background: var(--border);
+  }
+  .tl-item { position: relative; margin-bottom: 1.25rem; }
+  .tl-dot {
+    position: absolute; left: -2rem;
+    width: 16px; height: 16px; border-radius: 50%;
+    background: var(--gold); border: 2px solid white;
+    top: 3px;
+  }
+  .tl-dot.teal { background: var(--teal); }
+  .tl-dot.danger { background: #c83c28; }
+  .tl-title { font-size: 13px; font-weight: 500; color: var(--dark); }
+  .tl-desc { font-size: 13px; color: var(--mid); margin-top: 3px; line-height: 1.5; }
+
+  /* ── DIGITAL CARDS ── */
+  .digital-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .digital-card:hover { border-color: var(--gold); transform: translateY(-2px); }
+  .digital-card::before {
+    content: '';
+    position: absolute; top: 0; right: 0;
+    width: 80px; height: 80px;
+    border-radius: 0 var(--radius-lg) 0 80px;
+    background: var(--teal-pale);
+  }
+  .digital-card .dc-icon {
+    font-size: 28px; color: var(--teal);
+    margin-bottom: 0.75rem; display: block;
+  }
+  .digital-card h3 {
+    font-size: 14px; font-weight: 500; color: var(--dark);
+    margin-bottom: 0.75rem;
+  }
+
+  /* ── PRINT STYLES ── */
+  @media print {
+    .sidebar, .topbar { display: none !important; }
+    .main { margin-left: 0 !important; }
+    .section { display: block !important; padding: 1.5rem; }
+    .cover-hero { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    body { background: white; }
+  }
+
+  /* ── MOBILE ── */
+  @media (max-width: 768px) {
+    .sidebar { transform: translateX(-100%); }
+    .sidebar.open { transform: translateX(0); }
+    .main { margin-left: 0; }
+    .menu-toggle { display: block; }
+    .topbar { padding: 0 1.25rem; }
+    .section { padding: 1.25rem; }
+    .cover-title { font-size: 36px; }
+    .stat-grid { grid-template-columns: repeat(2, 1fr); }
+    .grid-2, .grid-3 { grid-template-columns: 1fr; }
+    .topbar-actions .topbar-btn:not(.primary) { display: none; }
+  }
+
+  /* ── OVERLAY ── */
+  .overlay {
+    display: none; position: fixed; inset: 0;
+    background: rgba(0,0,0,0.4); z-index: 150;
+  }
+  .overlay.open { display: block; }
+
+  /* ── FOOTER ── */
+  .page-footer {
+    margin-top: 3rem; padding-top: 2rem;
+    border-top: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 1rem;
+  }
+  .footer-logo { display: flex; align-items: center; gap: 8px; }
+  .footer-copy { font-size: 11px; color: #ccc; letter-spacing: 0.5px; }
+</style>
+</head>
+<body>
+
+<!-- OVERLAY MOBILE -->
+<div class="overlay" id="overlay" onclick="closeMobile()"></div>
+
+<!-- SIDEBAR -->
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-logo">
+    <div class="sidebar-logo-row">
+      <svg width="30" height="30" viewBox="0 0 42 42" fill="none">
+        <path d="M21 4L37 19H5L21 4Z" fill="#BA8747" opacity="0.35"/>
+        <path d="M21 12L37 27H5L21 12Z" fill="#BA8747" opacity="0.65"/>
+        <path d="M21 20L37 35H5L21 20Z" fill="#BA8747"/>
+      </svg>
+      <span class="logo-wordmark">IMPULSA</span>
+    </div>
+    <span class="sidebar-tagline">Manual de Convivencia 2026</span>
+  </div>
+
+  <nav class="sidebar-nav">
+    <span class="nav-section-label">Presentación</span>
+    <a class="nav-item active" onclick="show('inicio')" href="#">
+      <i class="ti ti-home-2"></i> Inicio
+    </a>
+
+    <span class="nav-section-label">Políticas Internas</span>
+    <a class="nav-item" onclick="show('normas')" href="#">
+      <i class="ti ti-clipboard-list"></i> Normas Generales
+    </a>
+    <a class="nav-item" onclick="show('salas')" href="#">
+      <i class="ti ti-door"></i> Salas de Reuniones
+    </a>
+    <a class="nav-item" onclick="show('sanitarios')" href="#">
+      <i class="ti ti-droplet"></i> Sanitarios
+    </a>
+    <a class="nav-item" onclick="show('cocina')" href="#">
+      <i class="ti ti-tools-kitchen-2"></i> Cocina y Comedor
+    </a>
+    <a class="nav-item" onclick="show('trabajo')" href="#">
+      <i class="ti ti-desk"></i> Área de Trabajo
+    </a>
+
+    <span class="nav-section-label">Nuevas Políticas</span>
+    <a class="nav-item" onclick="show('digital')" href="#">
+      <i class="ti ti-device-laptop"></i> Herramientas Digitales
+      <span class="nav-badge">Nuevo</span>
+    </a>
+    <a class="nav-item" onclick="show('emergencia')" href="#">
+      <i class="ti ti-shield-check"></i> Protocolos de Emergencia
+      <span class="nav-badge">Nuevo</span>
+    </a>
+
+    <span class="nav-section-label">Referencia</span>
+    <a class="nav-item" onclick="show('contactos')" href="#">
+      <i class="ti ti-address-book"></i> Contactos
+    </a>
+  </nav>
+
+  <div class="sidebar-footer">
+    Impulsa Desarrollos &copy; 2026 &nbsp;·&nbsp; Nivel 16
+  </div>
+</aside>
+
+<!-- MAIN -->
+<main class="main">
+
+  <!-- TOPBAR -->
+  <header class="topbar">
+    <div style="display:flex;align-items:center;gap:12px;">
+      <button class="menu-toggle" onclick="toggleMobile()" aria-label="Abrir menú">
+        <i class="ti ti-menu-2"></i>
+      </button>
+      <div class="topbar-breadcrumb" id="breadcrumb">
+        Manual de Convivencia &nbsp;/&nbsp; <span>Inicio</span>
+      </div>
+    </div>
+    <div class="topbar-actions">
+      <button class="topbar-btn" onclick="window.print()">
+        <i class="ti ti-printer" style="font-size:14px;"></i> Imprimir
+      </button>
+      <button class="topbar-btn primary" onclick="show('contactos')">
+        <i class="ti ti-address-book" style="font-size:14px;"></i> Contactos
+      </button>
+    </div>
+  </header>
+
+  <!-- ═══════════════════════════════ INICIO ═══════════════════════════════ -->
+  <section id="inicio" class="section active">
+    <div class="cover-hero">
+      <span class="cover-eyebrow">Oficinas Impulsa · Nivel 16 · Guatemala</span>
+      <h1 class="cover-title">Manual de<br>Convivencia</h1>
+      <p class="cover-subtitle">Versión 2026 &nbsp;·&nbsp; Edición Oficial</p>
+      <p class="cover-desc">
+        Este manual establece las directrices para el uso eficiente y respetuoso de nuestras instalaciones, garantizando un ambiente profesional, ordenado y agradable para todos los colaboradores de Impulsa.
+      </p>
+      <div class="cover-pills">
+        <span class="cover-pill">9 Secciones</span>
+        <span class="cover-pill">3 Salas de Reunión</span>
+        <span class="cover-pill">7 Sanitarios</span>
+        <span class="cover-pill">Nivel 16</span>
+      </div>
+    </div>
+
+    <div class="stat-grid">
+      <div class="stat-card">
+        <div class="stat-num">3</div>
+        <div class="stat-label">Salas de reunión</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">7</div>
+        <div class="stat-label">Sanitarios</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">2</div>
+        <div class="stat-label">Áreas de descanso</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">2</div>
+        <div class="stat-label">Showrooms</div>
+      </div>
+    </div>
+
+    <div class="floor-wrap">
+      <div class="card-title"><i class="ti ti-map-2"></i> Plano de Planta — Nivel 16</div>
+      <svg class="floor-map" viewBox="0 0 760 360" xmlns="http://www.w3.org/2000/svg">
+        <rect width="760" height="360" fill="#f9f7f4" rx="8"/>
+        <rect x="12" y="12" width="736" height="336" rx="6" fill="none" stroke="#BA8747" stroke-width="1.5"/>
+
+        <!-- Showroom 1 -->
+        <rect x="30" y="30" width="140" height="90" rx="4" fill="#EDE5D6" stroke="#BA8747" stroke-width="1.2"/>
+        <text x="100" y="70" text-anchor="middle" font-size="11" fill="#214A59" font-family="DM Sans, sans-serif" font-weight="400">Showroom</text>
+        <text x="100" y="84" text-anchor="middle" font-size="11" fill="#214A59" font-family="DM Sans, sans-serif">No. 1</text>
+
+        <!-- Showroom 2 -->
+        <rect x="30" y="145" width="140" height="90" rx="4" fill="#EDE5D6" stroke="#BA8747" stroke-width="1.2"/>
+        <text x="100" y="185" text-anchor="middle" font-size="11" fill="#214A59" font-family="DM Sans, sans-serif">Showroom</text>
+        <text x="100" y="199" text-anchor="middle" font-size="11" fill="#214A59" font-family="DM Sans, sans-serif">No. 2</text>
+
+        <!-- Sala Metal -->
+        <rect x="190" y="30" width="100" height="90" rx="4" fill="rgba(33,74,89,0.1)" stroke="#214A59" stroke-width="1"/>
+        <text x="240" y="70" text-anchor="middle" font-size="11" fill="#214A59" font-family="DM Sans, sans-serif">Sala</text>
+        <text x="240" y="84" text-anchor="middle" font-size="11" fill="#214A59" font-family="DM Sans, sans-serif">Metal</text>
+
+        <!-- Sala Fuego -->
+        <rect x="190" y="145" width="100" height="90" rx="4" fill="rgba(33,74,89,0.1)" stroke="#214A59" stroke-width="1"/>
+        <text x="240" y="185" text-anchor="middle" font-size="11" fill="#214A59" font-family="DM Sans, sans-serif">Sala</text>
+        <text x="240" y="199" text-anchor="middle" font-size="11" fill="#214A59" font-family="DM Sans, sans-serif">Fuego</text>
+
+        <!-- Recepción -->
+        <rect x="305" y="30" width="95" height="55" rx="4" fill="white" stroke="#BA8747" stroke-width="1"/>
+        <text x="352" y="62" text-anchor="middle" font-size="11" fill="#214A59" font-family="DM Sans, sans-serif">Recepción</text>
+
+        <!-- Sala de espera -->
+        <rect x="305" y="96" width="95" height="40" rx="4" fill="white" stroke="#BA8747" stroke-width="0.7"/>
+        <text x="352" y="120" text-anchor="middle" font-size="9" fill="#BA8747" font-family="DM Sans, sans-serif">Sala de Espera</text>
+
+        <!-- Ingreso -->
+        <circle cx="352" cy="145" r="14" fill="#214A59"/>
+        <text x="352" y="149" text-anchor="middle" font-size="9" fill="white" font-family="DM Sans, sans-serif">IN</text>
+
+        <!-- Oficina CCO -->
+        <rect x="415" y="30" width="85" height="55" rx="4" fill="white" stroke="#BA8747" stroke-width="0.7"/>
+        <text x="457" y="62" text-anchor="middle" font-size="10" fill="#214A59" font-family="DM Sans, sans-serif">Of. CCO</text>
+
+        <!-- Oficina CEO -->
+        <rect x="510" y="30" width="85" height="55" rx="4" fill="white" stroke="#BA8747" stroke-width="0.7"/>
+        <text x="552" y="62" text-anchor="middle" font-size="10" fill="#214A59" font-family="DM Sans, sans-serif">Of. CEO</text>
+
+        <!-- Sala Madera -->
+        <rect x="610" y="30" width="130" height="110" rx="4" fill="rgba(33,74,89,0.1)" stroke="#214A59" stroke-width="1"/>
+        <text x="675" y="80" text-anchor="middle" font-size="11" fill="#214A59" font-family="DM Sans, sans-serif">Sala</text>
+        <text x="675" y="94" text-anchor="middle" font-size="11" fill="#214A59" font-family="DM Sans, sans-serif">Madera</text>
+
+        <!-- Lounge Agua -->
+        <rect x="415" y="120" width="210" height="110" rx="4" fill="rgba(33,74,89,0.06)" stroke="#214A59" stroke-width="1"/>
+        <text x="520" y="174" text-anchor="middle" font-size="12" fill="#214A59" font-family="DM Sans, sans-serif" font-weight="500">Lounge Agua</text>
+
+        <!-- Baños colaboradores -->
+        <rect x="305" y="165" width="100" height="110" rx="4" fill="rgba(237,229,214,0.5)" stroke="#BA8747" stroke-width="0.8"/>
+        <text x="355" y="215" text-anchor="middle" font-size="9" fill="#BA8747" font-family="DM Sans, sans-serif">Baños /</text>
+        <text x="355" y="229" text-anchor="middle" font-size="9" fill="#BA8747" font-family="DM Sans, sans-serif">Lockers</text>
+
+        <!-- Lounge Tierra -->
+        <rect x="415" y="250" width="110" height="90" rx="4" fill="rgba(237,229,214,0.6)" stroke="#BA8747" stroke-width="1"/>
+        <text x="470" y="299" text-anchor="middle" font-size="10" fill="#214A59" font-family="DM Sans, sans-serif">Lounge Tierra</text>
+
+        <!-- Cocina -->
+        <rect x="535" y="250" width="100" height="90" rx="4" fill="white" stroke="#BA8747" stroke-width="0.7"/>
+        <text x="585" y="299" text-anchor="middle" font-size="10" fill="#214A59" font-family="DM Sans, sans-serif">Cocina</text>
+
+        <!-- Área de Trabajo -->
+        <rect x="645" y="155" width="100" height="185" rx="4" fill="rgba(186,135,71,0.07)" stroke="#BA8747" stroke-width="0.8"/>
+        <text x="695" y="245" text-anchor="middle" font-size="9" fill="#BA8747" font-family="DM Sans, sans-serif">Área de</text>
+        <text x="695" y="259" text-anchor="middle" font-size="9" fill="#BA8747" font-family="DM Sans, sans-serif">Trabajo</text>
+
+        <!-- Salida emergencia -->
+        <rect x="645" y="315" width="95" height="24" rx="4" fill="#1a7a3c"/>
+        <text x="692" y="331" text-anchor="middle" font-size="9" fill="white" font-family="DM Sans, sans-serif">SALIDA EMERGENCIA ↗</text>
+      </svg>
+    </div>
+
+    <div class="callout info">
+      <strong>Horario general de oficinas:</strong> Lunes a viernes, 8:00 a.m. – 6:00 p.m. El acceso fuera de este horario es exclusivo para el área Comercial con previa autorización de la Dirección.
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════ NORMAS ═══════════════════════════════ -->
+  <section id="normas" class="section">
+    <div class="section-head">
+      <span class="section-eyebrow">Políticas Internas</span>
+      <h2 class="section-title">Normas Generales de la Oficina</h2>
+      <p class="section-intro">Directrices de convivencia aplicables a todos los colaboradores en cualquier área de las instalaciones de Impulsa.</p>
+    </div>
+
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-title"><i class="ti ti-music"></i> Música</div>
+        <ul class="rule-list">
+          <li>Respetar la música ambiental seleccionada por la dirección en todo momento.</li>
+          <li>Si prefieres contenido diferente, usar auriculares sin excepción.</li>
+          <li>Está prohibido reproducir audio en computadoras con volumen audible para terceros.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="card-title"><i class="ti ti-ban"></i> Prohibiciones Generales</div>
+        <ul class="rule-list">
+          <li>Fumar en cualquier área de las instalaciones, incluyendo terrazas o pasillos.</li>
+          <li>Consumo de bebidas alcohólicas dentro de la oficina.</li>
+          <li>Uso de vocabulario o actitudes que irrespeten a compañeros, clientes o visitantes.</li>
+          <li>Ingresar mascotas sin autorización previa de Administración.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><i class="ti ti-users"></i> Servicio al Cliente y Visitas</div>
+      <ul class="rule-list">
+        <li>Todo colaborador debe apoyar la atención de visitantes cuando no haya personal en recepción.</li>
+        <li>Proveedores se atienden únicamente lunes y martes de 8:00 a.m. – 1:00 p.m. y de 2:00 p.m. – 6:00 p.m.</li>
+        <li>El asesor inmobiliario es responsable de sus clientes en todo momento, especialmente en horario de almuerzo.</li>
+        <li>Clientes sin cita: referir a recepción o, en su ausencia, a la Dirección de Ventas.</li>
+        <li><strong>Nuevo 2026:</strong> Toda visita externa debe registrarse en la bitácora de recepción sin excepción.</li>
+      </ul>
+    </div>
+
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-title"><i class="ti ti-package"></i> Lockers Personales</div>
+        <ul class="rule-list">
+          <li>Cada colaborador es responsable del cuidado y limpieza periódica de su locker.</li>
+          <li>No dejar alimentos perecederos por períodos prolongados.</li>
+          <li>Los lockers son personales e intransferibles.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="card-title"><i class="ti ti-credit-card"></i> Tarjetas de Ingreso y Parqueo</div>
+        <ul class="rule-list">
+          <li>Personales e intransferibles. Solo el titular está autorizado a utilizarlas.</li>
+          <li>Pérdida o daño: reportar de inmediato a <strong>eamado@impulsa.com.gt</strong></li>
+          <li>Reposición: costo de <strong>Q150</strong> a cargo del colaborador.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><i class="ti ti-device-laptop"></i> Equipo de Cómputo</div>
+      <ul class="rule-list">
+        <li>El equipo asignado es de uso exclusivo laboral en todo momento.</li>
+        <li>Reportar fallas o daños de inmediato a <strong>eamado@impulsa.com.gt</strong></li>
+        <li>Guardar el equipo bajo llave en el archivador asignado al finalizar la jornada.</li>
+        <li>El daño, pérdida o robo fuera de la oficina es responsabilidad del colaborador.</li>
+        <li>Evitar comer o beber cerca del equipo de cómputo para prevenir daños.</li>
+        <li><strong>Nuevo 2026:</strong> No instalar software sin autorización previa del departamento de IT.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════ SALAS ═══════════════════════════════ -->
+  <section id="salas" class="section">
+    <div class="section-head">
+      <span class="section-eyebrow">Uso Correcto de Espacios</span>
+      <h2 class="section-title">Salas de Reuniones</h2>
+      <p class="section-intro">Procedimientos para la reserva y uso apropiado de los tres espacios de reunión disponibles en el Nivel 16.</p>
+    </div>
+
+    <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:1.5rem;">
+      <span class="room-pill"><i class="ti ti-door" style="font-size:14px;"></i> Sala Madera &nbsp;— cap. 10</span>
+      <span class="room-pill"><i class="ti ti-door" style="font-size:14px;"></i> Sala Fuego &nbsp;— cap. 8</span>
+      <span class="room-pill"><i class="ti ti-door" style="font-size:14px;"></i> Sala Metal &nbsp;— cap. 6</span>
+    </div>
+
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-title"><i class="ti ti-calendar-event"></i> Proceso de Reservas</div>
+        <ul class="rule-list">
+          <li>Reservar a través de <strong>Outlook</strong> con al menos 24 horas de anticipación.</li>
+          <li>salamadera@impulsa.com.gt</li>
+          <li>salafuego@impulsa.com.gt</li>
+          <li>salametal@impulsa.com.gt</li>
+          <li>Cancelaciones con mínimo 2 horas de anticipación vía Outlook.</li>
+          <li>No es posible utilizar la sala sin reserva previa confirmada.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="card-title"><i class="ti ti-clock"></i> Horario y Acceso</div>
+        <ul class="rule-list">
+          <li>Disponibles de lunes a viernes de 8:00 a.m. a 5:00 p.m.</li>
+          <li>El área Comercial puede usar las salas fuera del horario regular con previa autorización.</li>
+          <li>Solicitar servicio de bebidas en la descripción de la convocatoria de Outlook.</li>
+          <li><strong>Nuevo 2026:</strong> Las salas cuentan con aforo máximo por norma de seguridad.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><i class="ti ti-device-tv"></i> Equipos y Materiales</div>
+      <ul class="rule-list">
+        <li>Cada sala está equipada con: pantalla de televisión, control remoto, aire acondicionado, marcadores para pizarra, borrador y pizarra de vidrio negro.</li>
+        <li>Reportar equipos faltantes o en mal funcionamiento al área de recepción.</li>
+        <li>No retirar equipos de las salas sin autorización.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><i class="ti ti-checklist"></i> Checklist de Salida — Sala de Reuniones</div>
+      <p style="font-size:12px;color:#aaa;margin-bottom:1rem;">Marca cada punto antes de retirarte. Puedes usar este checklist en tiempo real.</p>
+      <div id="checklist-container"></div>
+      <div class="progress-track"><div class="progress-fill" id="prog" style="width:0%"></div></div>
+      <div class="progress-label" id="prog-label">0 de 8 completados</div>
+    </div>
+
+    <div class="callout warn">
+      <strong>Fines de semana y días festivos:</strong> Los asesores comerciales que utilicen las salas son responsables de: dejar vasos/tazas en el área de lavaplatos, sillas ordenadas, mesa limpia, luces y aire acondicionado apagados, y puerta principal cerrada al retirarse.
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════ SANITARIOS ═══════════════════════════════ -->
+  <section id="sanitarios" class="section">
+    <div class="section-head">
+      <span class="section-eyebrow">Instalaciones</span>
+      <h2 class="section-title">Sanitarios</h2>
+      <p class="section-intro">Distribución y normas de uso de los sanitarios disponibles en el Nivel 16.</p>
+    </div>
+
+    <div class="stat-grid">
+      <div class="stat-card">
+        <div class="stat-num" style="color:var(--gold);">4</div>
+        <div class="stat-label">Para colaboradores<br>(2H / 2M)</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num" style="color:var(--gold);">1</div>
+        <div class="stat-label">Gerencia General<br>y VIP</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num" style="color:var(--gold);">2</div>
+        <div class="stat-label">Área Comercial<br>(solo clientes)</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num" style="color:var(--gold);">7</div>
+        <div class="stat-label">Total de sanitarios</div>
+      </div>
+    </div>
+
+    <div class="callout info">
+      Los 4 sanitarios para colaboradores están ubicados frente al Lounge Agua. Los 2 baños del área Comercial son de <strong>uso exclusivo para clientes, proveedores y visitas</strong> y no deben ser utilizados por el equipo.
+    </div>
+
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-title"><i class="ti ti-droplet"></i> Higiene General</div>
+        <ul class="rule-list">
+          <li>Lavarse las manos con frecuencia, especialmente después de usar el inodoro.</li>
+          <li>Usar jabón disponible para garantizar correcta higiene.</li>
+          <li>No arrojar papel higiénico, toallitas ni objetos al inodoro; usar los contenedores.</li>
+          <li>Evitar derramar jabón en el lavamanos; dejarlo limpio siempre.</li>
+          <li>Damas: dejar libre de cabello y residuos de maquillaje los artefactos.</li>
+          <li>Caballeros: está estrictamente prohibido rasurarse en el sanitario.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="card-title"><i class="ti ti-tool"></i> Mantenimiento y Reportes</div>
+        <ul class="rule-list">
+          <li>Reportar atascos o mal funcionamiento a Recepción: <strong>recepcion@impulsa.com.gt</strong></li>
+          <li>Si el sanitario se mancha, limpiarlo o usar el cepillo disponible.</li>
+          <li>Depositar toallas de papel en los contenedores, nunca en el suelo.</li>
+          <li>Si no hay papel higiénico o toallas, informar a la Recepcionista de inmediato.</li>
+          <li>Si el basurero está lleno, reportarlo a Recepción.</li>
+          <li><strong>Nuevo 2026:</strong> Reportar olores inusuales o problemas de ventilación.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════ COCINA ═══════════════════════════════ -->
+  <section id="cocina" class="section">
+    <div class="section-head">
+      <span class="section-eyebrow">Lounge Tierra</span>
+      <h2 class="section-title">Cocina y Comedor</h2>
+      <p class="section-intro">Normas para el uso adecuado de la cocina, cafetería y comedor, garantizando higiene y orden para todos los colaboradores.</p>
+    </div>
+
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-title"><i class="ti ti-device-floppy"></i> Microondas y Tostador</div>
+        <ul class="rule-list">
+          <li>Limpiar el protector y el interior después de cada uso con paño húmedo.</li>
+          <li>Usar únicamente paño húmedo para remover salpicaduras y restos de comida.</li>
+          <li>No calentar alimentos sin tapa o que puedan salpicar sin cubrir el plato.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="card-title"><i class="ti ti-droplet"></i> Ecofiltro y Refrigerador</div>
+        <ul class="rule-list">
+          <li>Si se derrama agua al servirse, limpiar el área de inmediato.</li>
+          <li>Todos los viernes a las 3:00 p.m.: limpieza general del refrigerador.</li>
+          <li>Retirar los alimentos antes de las 3:00 p.m. del viernes; lo que permanezca será desechado.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="callout warn">
+      <strong>Viernes a las 3:00 p.m.:</strong> Limpieza general del refrigerador. Todo alimento que permanezca después de esa hora, incluyendo toppers y envases personales, será desechado sin excepción.
+    </div>
+
+    <div class="card">
+      <div class="card-title"><i class="ti ti-tools-kitchen-2"></i> Vajilla y Utensilios de la Empresa</div>
+      <ul class="rule-list">
+        <li>Cada colaborador lava los utensilios de la empresa inmediatamente después de usarlos.</li>
+        <li>La vajilla personal es responsabilidad del dueño; no dejarla en espacios comunes.</li>
+        <li>Dejar el lavatrastos limpio, libre de restos de comida; esponja y jabón ordenados.</li>
+        <li>Cualquier derrame debe limpiarse de inmediato por quien lo provocó.</li>
+        <li>Solo almacenar alimentos para consumo en el entorno laboral; no productos perecederos prolongados.</li>
+        <li><strong>Nuevo 2026:</strong> No dejar comida sin identificar o sin fecha visible en el refrigerador.</li>
+      </ul>
+    </div>
+
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-title"><i class="ti ti-coffee"></i> Área de Cafetería</div>
+        <ul class="rule-list">
+          <li>No dejar cucharas, tazas ni basura en el espacio del filtro de agua.</li>
+          <li>Cerrar bien el filtro después de servirse para evitar desperdicio.</li>
+          <li>Cerrar correctamente los envases de café y azúcar.</li>
+          <li>Limpiar de inmediato si se derrama azúcar, café o agua.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="card-title"><i class="ti ti-armchair"></i> Mobiliario Lounge Tierra</div>
+        <ul class="rule-list">
+          <li>El mobiliario es exclusivo para sentarse.</li>
+          <li>Está estrictamente prohibido subir los pies, acostarse o pararse sobre sillones y sillas.</li>
+          <li>Mantener mesas y sillas limpias durante y después de su uso.</li>
+          <li>Empujar las sillas hacia la mesa o colocarlas en su lugar al retirarse.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════ TRABAJO ═══════════════════════════════ -->
+  <section id="trabajo" class="section">
+    <div class="section-head">
+      <span class="section-eyebrow">Espacios de Trabajo</span>
+      <h2 class="section-title">Lounge Agua y Área de Trabajo</h2>
+      <p class="section-intro">Normas para escritorios, archivadores, impresoras, cabinas telefónicas y el área de Lounge Agua.</p>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><i class="ti ti-sofa"></i> Lounge Agua</div>
+      <ul class="rule-list">
+        <li>Mantener el mobiliario ordenado y limpio durante y después de cada uso.</li>
+        <li>Solo se permiten bebidas en esta área; los alimentos deben consumirse en el Lounge Tierra.</li>
+        <li>Puede usarse para recibir proveedores o visitas breves (máximo 30 minutos).</li>
+        <li>Al ser un área abierta, moderar el volumen de conversaciones para no interrumpir el trabajo.</li>
+        <li><strong>Nuevo 2026:</strong> No realizar videollamadas en altavoz en el área de Lounge Agua.</li>
+      </ul>
+    </div>
+
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-title"><i class="ti ti-desk"></i> Escritorios</div>
+        <ul class="rule-list">
+          <li>Mantener el espacio limpio y ordenado al inicio y al final de cada jornada.</li>
+          <li>No colocar elementos decorativos, fotografías, plantas, bolsos ni loncheras sobre el escritorio.</li>
+          <li>Está prohibido comer en el área de escritorios.</li>
+          <li><strong>Nuevo 2026:</strong> Los cables deben organizarse para mantener la estética del espacio.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="card-title"><i class="ti ti-archive"></i> Archivadores</div>
+        <ul class="rule-list">
+          <li>Cada colaborador es responsable de su llave y del orden de su archivador.</li>
+          <li>Uso exclusivo para documentación de la empresa; no se permiten artículos personales ni alimentos.</li>
+          <li>Realizar limpieza periódica para evitar acumulación de documentos innecesarios.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-title"><i class="ti ti-printer"></i> Impresoras</div>
+        <ul class="rule-list">
+          <li>Recoger documentos inmediatamente después de imprimir para evitar extravíos.</li>
+          <li>Respetar el orden de llegada cuando hay varias personas esperando.</li>
+          <li>Preferir impresión doble cara o en blanco y negro para ahorrar recursos.</li>
+          <li>Uso exclusivo para documentos laborales. Evitar impresión personal.</li>
+          <li>Falta de papel o tinta: reportar a Eunice Hernández en recepcion@impulsa.com.gt</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="card-title"><i class="ti ti-phone"></i> Cabinas Telefónicas</div>
+        <ul class="rule-list">
+          <li>Para llamadas de trabajo o personales; máximo 45 minutos por sesión.</li>
+          <li>Si se requiere más tiempo, reservar una sala de reuniones.</li>
+          <li>Al salir: sin pertenencias ni basura, puertas bien cerradas.</li>
+          <li>No se permiten alimentos dentro de las cabinas.</li>
+          <li>Reportar daños o mal funcionamiento a Recepción.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════ DIGITAL ═══════════════════════════════ -->
+  <section id="digital" class="section">
+    <div class="section-head">
+      <span class="section-eyebrow">Nuevas Políticas 2026</span>
+      <h2 class="section-title">Herramientas Digitales</h2>
+      <p class="section-intro">Con el crecimiento de las plataformas digitales dentro de Impulsa, estas normas regulan el uso responsable de los recursos tecnológicos corporativos.</p>
+    </div>
+
+    <div class="grid-2" style="margin-bottom:1.25rem;">
+      <div class="digital-card">
+        <i class="ti ti-wifi dc-icon"></i>
+        <h3>Red e Internet</h3>
+        <ul class="rule-list">
+          <li>La red de la empresa es de uso laboral prioritario.</li>
+          <li>No conectar dispositivos de almacenamiento externos sin autorización de IT.</li>
+          <li>No compartir credenciales de plataformas corporativas.</li>
+          <li>Uso de VPN corporativa obligatoria en redes públicas.</li>
+        </ul>
+      </div>
+      <div class="digital-card">
+        <i class="ti ti-mail dc-icon"></i>
+        <h3>Correo Electrónico</h3>
+        <ul class="rule-list">
+          <li>El correo corporativo es de uso exclusivo profesional.</li>
+          <li>No suscribirse a servicios personales con el correo de Impulsa.</li>
+          <li>Reportar correos sospechosos o de phishing a IT de inmediato.</li>
+          <li>Mantener el tono institucional en toda correspondencia corporativa.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="grid-2" style="margin-bottom:1.25rem;">
+      <div class="digital-card">
+        <i class="ti ti-brand-instagram dc-icon"></i>
+        <h3>Redes Sociales</h3>
+        <ul class="rule-list">
+          <li>No publicar información confidencial o imágenes de instalaciones sin autorización.</li>
+          <li>El uso de redes personales debe ser mínimo en horario laboral.</li>
+          <li>Todo contenido relacionado con Impulsa debe ser autorizado por Marketing.</li>
+        </ul>
+      </div>
+      <div class="digital-card">
+        <i class="ti ti-lock dc-icon"></i>
+        <h3>Confidencialidad y Seguridad</h3>
+        <ul class="rule-list">
+          <li>No discutir proyectos o estrategias en áreas comunes visibles al público.</li>
+          <li>Bloquear la computadora al alejarse: Win+L (Windows) / Cmd+Ctrl+Q (Mac).</li>
+          <li>Las contraseñas deben ser robustas y actualizarse periódicamente.</li>
+          <li>Reportar incidentes de seguridad informática a IT de inmediato.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="callout danger">
+      <strong>Aviso importante:</strong> La instalación de software no autorizado, el acceso a sistemas sin permisos o la divulgación de información confidencial de la empresa constituyen faltas graves sujetas a medidas disciplinarias.
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════ EMERGENCIA ═══════════════════════════════ -->
+  <section id="emergencia" class="section">
+    <div class="section-head">
+      <span class="section-eyebrow">Seguridad — Nuevas Políticas 2026</span>
+      <h2 class="section-title">Protocolos de Emergencia</h2>
+      <p class="section-intro">La seguridad de todos los colaboradores es la prioridad más alta de Impulsa. Familiarízate con estos protocolos antes de necesitarlos.</p>
+    </div>
+
+    <div class="callout warn" style="margin-top:0;">
+      <strong>Regla de oro:</strong> En cualquier emergencia: CONSERVA LA CALMA · SIGUE LAS INSTRUCCIONES DEL PERSONAL AUTORIZADO · DIRÍGETE A LA SALIDA DE EMERGENCIA (extremo derecho del Área de Trabajo).
+    </div>
+
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-title"><i class="ti ti-flame"></i> Evacuación por Incendio</div>
+        <div class="timeline">
+          <div class="tl-item">
+            <div class="tl-dot danger"></div>
+            <div class="tl-title">1. Al escuchar la alarma</div>
+            <div class="tl-desc">Detén todo lo que estás haciendo. No recojas pertenencias. Evacúa de manera ordenada y sin correr.</div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-dot danger"></div>
+            <div class="tl-title">2. Usa siempre las escaleras</div>
+            <div class="tl-desc">Nunca uses el elevador durante una evacuación de emergencia.</div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-dot teal"></div>
+            <div class="tl-title">3. Punto de reunión</div>
+            <div class="tl-desc">Área de parqueo exterior del edificio. Permanecer allí hasta recibir indicaciones.</div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-dot"></div>
+            <div class="tl-title">4. No regresar</div>
+            <div class="tl-desc">No volver al edificio hasta que personal autorizado lo indique expresamente.</div>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title"><i class="ti ti-first-aid-kit"></i> Primeros Auxilios</div>
+        <ul class="rule-list">
+          <li>El botiquín de primeros auxilios está ubicado en el área de Recepción.</li>
+          <li>Ante cualquier accidente, notificar de inmediato a Recepción.</li>
+          <li>No mover a una persona lesionada sin asistencia capacitada.</li>
+          <li>Los números de emergencia están visibles en Recepción y en cada sala de reuniones.</li>
+          <li>Los extintores están ubicados en cada sala de reuniones y en el área de cocina.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><i class="ti ti-shield-check"></i> Seguridad General del Edificio</div>
+      <ul class="rule-list">
+        <li>No permitir el ingreso de personas no autorizadas. Todo visitante debe registrarse en recepción.</li>
+        <li>Las tarjetas de acceso no deben prestarse bajo ninguna circunstancia.</li>
+        <li>Reportar comportamientos sospechosos o situaciones de riesgo a Administración.</li>
+        <li>Al retirarse, verificar que ventanas, puertas y luces queden correctamente aseguradas y apagadas.</li>
+        <li>Las cámaras de seguridad operan en todo momento en áreas comunes y accesos del edificio.</li>
+        <li><strong>Nuevo 2026:</strong> Cualquier incidente de seguridad debe documentarse en la bitácora de recepción dentro de las 24 horas siguientes al evento.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════ CONTACTOS ═══════════════════════════════ -->
+  <section id="contactos" class="section">
+    <div class="section-head">
+      <span class="section-eyebrow">Referencia Rápida</span>
+      <h2 class="section-title">Directorio de Contactos</h2>
+      <p class="section-intro">Personas responsables por área para reportes, solicitudes e incidencias dentro de las instalaciones de Impulsa.</p>
+    </div>
+
+    <div style="margin-bottom:1.5rem;">
+      <div class="contact-row">
+        <div class="c-avatar">EH</div>
+        <div class="c-info">
+          <div class="c-name">Eunice Hernández</div>
+          <div class="c-role">Recepcionista — Administración de Salas, Limpieza, Sanitarios, Impresoras</div>
+          <div class="c-email">recepcion@impulsa.com.gt</div>
+        </div>
+        <div class="c-tag">Recepción</div>
+      </div>
+      <div class="contact-row">
+        <div class="c-avatar">EA</div>
+        <div class="c-info">
+          <div class="c-name">Escarleth Amado</div>
+          <div class="c-role">Soporte Técnico — Equipo de Cómputo, Tarjetas, Administración IT</div>
+          <div class="c-email">eamado@impulsa.com.gt</div>
+        </div>
+        <div class="c-tag">IT / Admin</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><i class="ti ti-mail-forward"></i> Correos de Reserva — Salas de Reuniones</div>
+      <div class="grid-3" style="margin-top:0.5rem;">
+        <div class="email-chip">
+          <div class="email-chip-title">Sala Madera</div>
+          <div class="email-chip-addr">salamadera@<br>impulsa.com.gt</div>
+        </div>
+        <div class="email-chip">
+          <div class="email-chip-title">Sala Fuego</div>
+          <div class="email-chip-addr">salafuego@<br>impulsa.com.gt</div>
+        </div>
+        <div class="email-chip">
+          <div class="email-chip-title">Sala Metal</div>
+          <div class="email-chip-addr">salametal@<br>impulsa.com.gt</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout info">
+      Para reportar problemas técnicos en salas, avisar a Recepción y registrar el reporte por escrito en el <strong>"Libro de Control de Mantenimiento"</strong> con la sala afectada, descripción del problema y fecha.
+    </div>
+
+    <div class="page-footer">
+      <div class="footer-logo">
+        <svg width="28" height="28" viewBox="0 0 42 42" fill="none">
+          <path d="M21 4L37 19H5L21 4Z" fill="#BA8747" opacity="0.35"/>
+          <path d="M21 12L37 27H5L21 12Z" fill="#BA8747" opacity="0.65"/>
+          <path d="M21 20L37 35H5L21 20Z" fill="#BA8747"/>
+        </svg>
+        <span style="font-family:'DM Sans';font-size:13px;font-weight:300;letter-spacing:4px;color:var(--teal);text-transform:uppercase;">IMPULSA</span>
+      </div>
+      <span class="footer-copy">Manual de Convivencia — Oficinas Impulsa 2026 — Nivel 16</span>
+    </div>
+  </section>
+
+</main>
+
+<script>
+const sections = ['inicio','normas','salas','sanitarios','cocina','trabajo','digital','emergencia','contactos'];
+const labels = {
+  inicio: 'Inicio',
+  normas: 'Normas Generales',
+  salas: 'Salas de Reuniones',
+  sanitarios: 'Sanitarios',
+  cocina: 'Cocina y Comedor',
+  trabajo: 'Área de Trabajo',
+  digital: 'Herramientas Digitales',
+  emergencia: 'Protocolos de Emergencia',
+  contactos: 'Contactos'
+};
+
+function show(id) {
+  sections.forEach(s => {
+    document.getElementById(s).classList.toggle('active', s === id);
+  });
+  document.querySelectorAll('.nav-item').forEach(el => {
+    el.classList.toggle('active', el.getAttribute('onclick').includes("'"+id+"'"));
+  });
+  document.getElementById('breadcrumb').innerHTML =
+    'Manual de Convivencia &nbsp;/&nbsp; <span>' + labels[id] + '</span>';
+  closeMobile();
+  window.scrollTo(0, 0);
+}
+
+function toggleMobile() {
+  document.getElementById('sidebar').classList.toggle('open');
+  document.getElementById('overlay').classList.toggle('open');
+}
+function closeMobile() {
+  document.getElementById('sidebar').classList.remove('open');
+  document.getElementById('overlay').classList.remove('open');
+}
+
+// CHECKLIST
+const items = [
+  'Sillas ordenadas y en su lugar',
+  'Mesa limpia y libre de residuos',
+  'Pizarrón limpio y marcadores guardados',
+  'Aire acondicionado apagado',
+  'Luces apagadas',
+  'Tazas y vasos reportados a Recepción',
+  'Equipo audiovisual en orden',
+  'Puerta cerrada correctamente'
+];
+const container = document.getElementById('checklist-container');
+let checked = 0;
+
+items.forEach((text, i) => {
+  const div = document.createElement('div');
+  div.className = 'checklist-item';
+  div.innerHTML = `<div class="cl-box" id="box${i}"></div><span class="cl-label">${text}</span>`;
+  div.onclick = () => {
+    div.classList.toggle('checked');
+    const isChecked = div.classList.contains('checked');
+    document.getElementById('box'+i).innerHTML = isChecked ? '<i class="ti ti-check"></i>' : '';
+    checked = document.querySelectorAll('.checklist-item.checked').length;
+    const pct = Math.round((checked / items.length) * 100);
+    document.getElementById('prog').style.width = pct + '%';
+    document.getElementById('prog-label').textContent = checked + ' de ' + items.length + ' completados';
+  };
+  container.appendChild(div);
+});
+</script>
+</body>
+</html>
